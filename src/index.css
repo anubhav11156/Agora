@@ -1,13 +1,24 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+    font-family:'Mabry-Regular';
+    src:url('/src/fonts/MabryProRegular.ttf');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+    font-family:'Mabry-Medium';
+    src:url('/src/fonts/Mabry-Pro-Medium.ttf');
+}
+
+@font-face {
+    font-family:'Mabry-Bold';
+    src:url('/src/fonts/MabryProBold.otf');
+}
+
+@font-face {
+    font-family:'Mabry-Light';
+    src:url('/src/fonts/MabryProLight.otf');
+}
+
+body {
+  margin: 0;
+  padding-bottom: 2000px;
 }
