@@ -70,7 +70,9 @@ function Header() {
     return (
         <Container>
           <div className="left">
-            <p>agora</p>
+            <div className="logo-div">
+              <p>agora</p>
+            </div>
           </div>
           <Menu>
             <div className="menu-wrapper">
@@ -107,24 +109,24 @@ export default Header
 
 const Container=styled.div`
   position: fixed;
-
   z-index: 10;
   height: 68px;
   width: 100%;
   border-bottom: 2px solid black;
-
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   .left{
+    margin-left: 20px;
     width: 140px;
     display: flex;
     align-items: center;
-    height: 50px;
+    justify-content: center;
+    height: 65px;
 
     p {
-      margin-left: 20px;
       padding-bottom: 2px;
       font-family: Mabry-bold;
       font-size: 50px;
@@ -192,6 +194,6 @@ const Login=styled.div`
   transition: background-color 0.15s;
 
   &:hover {
-    background-color: red;
+    background-color: rgba(255,100,234,255);
   }
 `
