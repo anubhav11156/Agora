@@ -33,25 +33,12 @@ function Header() {
       .catch(function (error) {
         console.log("error is" ,error);
       });
-
-    setLoginStatus(true);
-    console.log("test : ",loginStatus);
   }
 
   const loginHandler = async () => {
-
     if(isAuthenticated == false){
       // login
       await authenticateFucntion();
-      // after login change the button text to logout only if the authentication was successfull
-      console.log("after authenticateFucntion is called, staus is : ",loginStatus);
-      if(loginStatus == true ){
-        setLogintext("Logout");
-        // alert("Logged In");
-        toast.success("Logged In", {
-        position: toast.POSITION.TOP_CENTER
-        });
-      }
     }
     else if(isAuthenticated == true ){
       logout();
@@ -61,11 +48,18 @@ function Header() {
       position: toast.POSITION.TOP_CENTER
       });
     }
-
   };
 
+  useEffect(() => {
+    if(isAuthenticated){
+      setLogintext("Logout");
+      toast.success("Logged In", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
+  })
 
-    console.log("login status :" ,isAuthenticated);
+
 
     return (
         <Container>
