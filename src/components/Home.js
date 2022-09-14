@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import All from '../components/All'
-import Music from '../components/Music'
 import {
   Link,
   Element,
@@ -12,20 +11,9 @@ import {
 
 function Home() {
 
-  const [allState, setAllState] = useState(true);
-  const [isMusicClicked, setIsMusicClicked] = useState(false);
-  const [isAnimationClicked, setIsAnimationClicked] = useState(false);
-  const [isEbooksClicked, setIsEbookdClicked] = useState(false);
-  const [isDesignClicked, setIsDesignClicked] = useState(false);
-  const [isArtClicked, setIsArtClicked] = useState(false);
-  const [isPodcastClicked, setIsPodcastClicked] = useState(false);
-  const [isArticlesClicked, setIsArticlesClicked] = useState(false);
-  const [isFilmsClicked, setIsFilmsClicked] = useState(false);
-  const [isEducation,setIsEducationClicked] = useState(false);
-
   const allClickHandle = () => {
     scroll.scrollToTop({
-      duration: 600,
+      duration: 800,
       delay: 100,
       smooth: true
     });
@@ -141,6 +129,7 @@ const Container=styled.div`
   width: 100%;
   height:auto;
   overflow-x: hidden;
+    background-color: rgba(244,245,240,255);
 `
 const ButtonWrapper=styled.div`
   position:fixed;
@@ -150,7 +139,7 @@ const ButtonWrapper=styled.div`
   z-index: 5;
 `
 const Buttons=styled.div`
-  background-color: white;
+  background-color: yellow;
   margin-left: auto;
   margin-right: auto;
   height: 57px;

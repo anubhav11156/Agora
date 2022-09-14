@@ -6,11 +6,11 @@ function Music() {
         <Container>
           <div className="Heading">
             <div className="icon-div">
-              <img src="/images/music-logo.png" />
+              <img src="/images/art-logo.png" />
             </div>
             <div className="text-div">
-              <p className="title">Music</p>
-              <p className="description">No middle man cutting your sales. Create, Buy, Sell and Earn with your music NFTs.</p>
+              <p className="title">Art & Drawing</p>
+              <p className="description">From paint brushes to your own arts, sell and buy anything!</p>
             </div>
           </div>
           <div className="card-div">this div is for the cards</div>

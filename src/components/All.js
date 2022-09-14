@@ -1,5 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import Music from '../components/Music'
+import Animation from '../components/Animation'
+import Ebooks from '../components/Ebooks'
+import Art from '../components/Art'
+import Podcast from '../components/Podcast'
+import Articles from '../components/Articles'
+import Films from '../components/Films'
+import Education from '../components/Education'
+
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -63,42 +72,42 @@ function All() {
 
             <Element name="music" className="music-section">
               <div className="insideContainer">
-
+                <Music />
               </div>
             </Element>
             <Element name="animation" className="animation-section">
               <div className="insideContainer">
-
+                <Animation />
               </div>
             </Element>
             <Element name="ebooks" className="ebooks-section">
               <div className="insideContainer">
-
+                <Ebooks />
               </div>
             </Element>
             <Element name="art" className="art-section">
               <div className="insideContainer">
-
+                <Art />
               </div>
             </Element>
             <Element name="podcast" className="podcast-section">
               <div className="insideContainer">
-
+                <Podcast />
               </div>
             </Element>
             <Element name="articles" className="articles-section">
               <div className="insideContainer">
-
+                <Articles />
               </div>
             </Element>
             <Element name="films" className="films-section">
               <div className="insideContainer">
-
+                <Films />
               </div>
             </Element>
             <Element name="education" className="education-section">
               <div className="insideContainer">
-
+                <Education />
               </div>
             </Element>
         </Content>
@@ -195,8 +204,6 @@ const Description=styled.div`
 `
 const Content=styled.div`
   height: 7650px;
-  background-color: lightblue;
-
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
@@ -217,7 +224,6 @@ const Content=styled.div`
     padding-bottom: 10px;
 
     .insideContainer {
-      background-color: lightpink;
       width: 1140px;
       display: flex;
       justify-content: center;

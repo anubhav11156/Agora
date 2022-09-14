@@ -6,11 +6,11 @@ function Music() {
         <Container>
           <div className="Heading">
             <div className="icon-div">
-              <img src="/images/music-logo.png" />
+              <img src="/images/animation-logo.png" />
             </div>
             <div className="text-div">
-              <p className="title">Music</p>
-              <p className="description">No middle man cutting your sales. Create, Buy, Sell and Earn with your music NFTs.</p>
+              <p className="title">Animation</p>
+              <p className="description">Grow with this fast moving industry with our community.</p>
             </div>
           </div>
           <div className="card-div">this div is for the cards</div>
@@ -36,7 +36,7 @@ const Container=styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(144, 168, 237, 1);
+    background-color: rgba(35, 160, 148, 1);
 
     .icon-div {
       width: 80px;
@@ -45,7 +45,7 @@ const Container=styled.div`
       margin-left: 30px;
 
       img {
-        width: 95%;
+        width: 100%;
       }
     }
 

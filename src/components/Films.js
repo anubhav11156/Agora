@@ -6,11 +6,11 @@ function Music() {
         <Container>
           <div className="Heading">
             <div className="icon-div">
-              <img src="/images/music-logo.png" />
+              <img src="/images/films-logo.png" />
             </div>
             <div className="text-div">
-              <p className="title">Music</p>
-              <p className="description">No middle man cutting your sales. Create, Buy, Sell and Earn with your music NFTs.</p>
+              <p className="title">Films</p>
+              <p className="description">Create, publish and watch with NFT based subscription.</p>
             </div>
           </div>
           <div className="card-div">this div is for the cards</div>
@@ -36,7 +36,7 @@ const Container=styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(144, 168, 237, 1);
+    background-color: rgba(241, 243, 51, 1);
 
     .icon-div {
       width: 80px;
