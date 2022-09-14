@@ -1,45 +1,134 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import All from '../components/All'
+import Music from '../components/Music'
+import {
+  Link,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scroller,
+} from "react-scroll";
 
 function Home() {
+
+  const [allState, setAllState] = useState(true);
+  const [isMusicClicked, setIsMusicClicked] = useState(false);
+  const [isAnimationClicked, setIsAnimationClicked] = useState(false);
+  const [isEbooksClicked, setIsEbookdClicked] = useState(false);
+  const [isDesignClicked, setIsDesignClicked] = useState(false);
+  const [isArtClicked, setIsArtClicked] = useState(false);
+  const [isPodcastClicked, setIsPodcastClicked] = useState(false);
+  const [isArticlesClicked, setIsArticlesClicked] = useState(false);
+  const [isFilmsClicked, setIsFilmsClicked] = useState(false);
+  const [isEducation,setIsEducationClicked] = useState(false);
+
+  const allClickHandle = () => {
+    scroll.scrollToTop({
+      duration: 600,
+      delay: 100,
+      smooth: true
+    });
+  }
+
+  const musicClickHandle = () => {
+    scroller.scrollTo('music', {
+      duration: 600,
+      delay: 100,
+      smooth: true,
+    });
+  }
+
+  const animationClickHandle = () => {
+    scroller.scrollTo('animation', {
+      duration: 600,
+      delay: 100,
+      smooth: true
+    });
+  }
+
+  const ebooksClickHandle = () => {
+    scroller.scrollTo('ebooks', {
+      duration: 600,
+      delay: 100,
+      smooth: true
+    });
+  }
+
+  const artClickHandle = () => {
+    scroller.scrollTo('art', {
+      duration: 600,
+      delay: 100,
+      smooth: true
+    });
+  }
+
+  const podcastClickHandle = () => {
+    scroller.scrollTo('podcast', {
+      duration: 600,
+      delay: 100,
+      smooth: true
+    });
+  }
+
+  const articlesClickHandle = () => {
+    scroller.scrollTo('articles', {
+      duration: 600,
+      delay: 100,
+      smooth: true
+    });
+  }
+
+  const filmsClickHandle = () => {
+    scroller.scrollTo('films', {
+      duration: 600,
+      delay: 100,
+      smooth: true
+    });
+  }
+
+  const educationClickHandle = () => {
+    scroller.scrollTo('education', {
+      duration: 600,
+      delay: 100,
+      smooth: true
+    });
+  }
+
     return (
         <Container>
-          <Banner>
+          <ButtonWrapper>
             <Buttons>
-              <div className="all-div">
-                <button>All</button>
+              <div className="all-div" id="all">
+                <button onClick={allClickHandle}>All</button>
               </div>
-              <div className="music-div">
-                <button>Music</button>
-              </div>
-              <div className="animation-div">
-                <button>Animation</button>
-              </div>
-              <div className="ebooks-div">
-                <button>Ebooks</button>
-              </div>
-              <div className="design-div">
-                <button>Design</button>
-              </div>
-              <div className="art-div">
-                <button>Art & Drawing</button>
-              </div>
-              <div className="podcast-div">
-                <button>Podcast</button>
-              </div>
-              <div className="articles-div">
-                <button>Articles</button>
-              </div>
-              <div className="films-div">
-                <button>Films</button>
-              </div>
-              <div className="education-div">
-                <button>Education</button>
-              </div>
+              <Link className="music-div" id="music" >
+                <button onClick={musicClickHandle}>Music</button>
+              </Link>
+              <Link className="animation-div" id="animationLink">
+                <button onClick={animationClickHandle}>Animation</button>
+              </Link>
+              <Link className="ebooks-div" id="design">
+                <button onClick={ebooksClickHandle}>Ebooks</button>
+              </Link>
+              <Link className="art-div" id="art">
+                <button onClick={artClickHandle}>Art & Drawing</button>
+              </Link>
+              <Link className="podcast-div" id="podcast">
+                <button onClick={podcastClickHandle}>Podcast</button>
+              </Link>
+              <Link className="articles-div" id="articles">
+                <button onClick={articlesClickHandle}>Articles</button>
+              </Link>
+              <Link className="films-div" id="films">
+                <button onClick={filmsClickHandle}>Films</button>
+              </Link>
+              <Link className="education-div" id="education">
+                <button onClick={educationClickHandle}>Education</button>
+              </Link>
             </Buttons>
-            <All />
-          </Banner>
+          </ButtonWrapper>
+          <All id="all-div"/>
         </Container>
     )
 }
@@ -50,24 +139,20 @@ const Container=styled.div`
   padding-top: 68px;
   background-color: rgba(255, 255, 255, 0.79);
   width: 100%;
-  height: 1200px;
-  display: flex;
-  justify-content: center;
+  height:auto;
+  overflow-x: hidden;
 `
-const Banner=styled.div`
-  position: relative;
+const ButtonWrapper=styled.div`
+  position:fixed;
+  margin-top: 20px;
+  height: 65px;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  height: 605px;
-  border-bottom: 1px solid black;
-`
-
-
-const Buttons=styled.div`
-  position: absolute;
-  top: 30px;
   z-index: 5;
+`
+const Buttons=styled.div`
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
   height: 57px;
   width: 1140px;
   display: flex;
@@ -154,13 +239,6 @@ const Buttons=styled.div`
         background-color: white;
         box-shadow: 4px 4px 0px black;
       }
-
-      &:focus {
-        border: 1px solid black;
-        border-radius: 25px;
-        background-color: white;
-      }
-
     }
   }
 

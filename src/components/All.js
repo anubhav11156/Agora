@@ -1,40 +1,149 @@
 import React from 'react'
 import styled from 'styled-components'
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Footer from './Footer'
+import {
+  Link,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scroller,
+} from "react-scroll";
 
 function All() {
+
+  let settings = {
+    dots: false,
+    infinite: true,
+    speed: 580,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000
+  }
+
+
     return (
-        <Container>
-          <Top>
-          </Top>
-          <Bottom>
-            <Description>
-              <div className="text">
-                <p>Discover, buy, and sell your digital product as <span><a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/" target="_blank">ERC-1155</a></span> token.</p>
+      <Container>
+        <Banner>
+          <Carousel {...settings}>
+            <Slide1>
+              <Top>
+              </Top>
+              <Bottom>
+                <Description>
+                  <div className="text">
+                    <p>Discover, buy, and sell your digital product as <span><a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/" target="_blank">ERC-1155</a></span> token.</p>
+                  </div>
+                  <div className="image">
+                    <img src="/images/test2.png" />
+                  </div>
+                </Description>
+              </Bottom>
+            </Slide1>
+            <Slide2>
+              <Top>
+              </Top>
+              <Bottom>
+                <Description>
+                  <div className="text">
+                    <p>Discover, buy, and sell your digital product as <span><a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-1155/" target="_blank">ERC-1155</a></span> token.</p>
+                  </div>
+                  <div className="image">
+                    <img src="/images/test2.png" />
+                  </div>
+                </Description>
+              </Bottom>
+            </Slide2>
+          </Carousel>
+        </Banner>
+        <Content>
+
+            <Element name="music" className="music-section">
+              <div className="insideContainer">
+
               </div>
-              <div className="image">
-                <img src="/images/test2.png" />
+            </Element>
+            <Element name="animation" className="animation-section">
+              <div className="insideContainer">
+
               </div>
-            </Description>
-          </Bottom>
-        </Container>
+            </Element>
+            <Element name="ebooks" className="ebooks-section">
+              <div className="insideContainer">
+
+              </div>
+            </Element>
+            <Element name="art" className="art-section">
+              <div className="insideContainer">
+
+              </div>
+            </Element>
+            <Element name="podcast" className="podcast-section">
+              <div className="insideContainer">
+
+              </div>
+            </Element>
+            <Element name="articles" className="articles-section">
+              <div className="insideContainer">
+
+              </div>
+            </Element>
+            <Element name="films" className="films-section">
+              <div className="insideContainer">
+
+              </div>
+            </Element>
+            <Element name="education" className="education-section">
+              <div className="insideContainer">
+
+              </div>
+            </Element>
+        </Content>
+        <Footer />
+      </Container>
     )
+
 }
 
 export default All
 
 const Container=styled.div`
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
+const Banner=styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 605px;
+  border-bottom: 1px solid black;
+`
+const Carousel=styled(Slider)`
   height: 605px;
   width: 100%;
-  background-color: rgba(254, 212, 0, 255);
-  display: grid;
-  grid-template-rows: 85px 1fr;
 `
-
+const Slide1=styled.div`
+  background-color: rgba(254, 212, 0, 255);
+  height: 605px;
+  display: flex;
+`
+const Slide2=styled.div`
+  background-color: red;
+  height: 605px;
+  display: flex;
+`
 const Top=styled.div`
-  font-size: 40px;
+  height: 105px;
 `
 
 const Bottom=styled.div`
+  flex: 1;
   display: flex;
   justify-content: center;
 `
@@ -80,6 +189,38 @@ const Description=styled.div`
 
     img {
       width: 100%;
+    }
+  }
+
+`
+const Content=styled.div`
+  height: 7650px;
+  background-color: lightblue;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+  .music-section,
+  .animation-section,
+  .ebooks-section,
+  .design-section,
+  .art-section,
+  .podcast-section,
+  .articles-section,
+  .films-section,
+  .education-section {
+    flex:1;
+    display:flex;
+    justify-content: center;
+    border-bottom: 1px solid black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .insideContainer {
+      background-color: lightpink;
+      width: 1140px;
+      display: flex;
+      justify-content: center;
     }
   }
 

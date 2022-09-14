@@ -11,7 +11,6 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
     <MoralisProvider
       serverUrl="https://tnihscgwmza8.usemoralis.com:2053/server"
       appId="809HtNkIKBLViIOwt3kXC4SI7JJOFaXnw9PMgaLa"
@@ -20,7 +19,6 @@ root.render(
         <App />
       </Provider>
     </MoralisProvider>
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -9,6 +9,7 @@ function Header() {
   // for login and logout
   const [loginStatus, setLoginStatus] = useState(false);
   const [loginText, setLogintext] = useState("Login");
+  const [flag, setFlag] = useState(0); // this is used so that login occurs only once.
 
   const {
     authenticate,
@@ -43,6 +44,7 @@ function Header() {
     else if(isAuthenticated == true ){
       logout();
       setLogintext("Login");
+      setFlag(0);
       // alert("Logged Out");
       toast.success("Logged Out", {
       position: toast.POSITION.TOP_CENTER
@@ -51,13 +53,14 @@ function Header() {
   };
 
   useEffect(() => {
-    if(isAuthenticated){
+    if(isAuthenticated && flag==0){
       setLogintext("Logout");
       toast.success("Logged In", {
         position: toast.POSITION.TOP_CENTER
       });
+      setFlag(1);
     }
-  })
+  });
 
 
 
