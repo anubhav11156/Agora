@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import MusicCard from '../components/productCards/MusicCard'
+import SectionCard from '../components/SectionCard'
 
 
 function CategorySection(props) {
@@ -51,12 +51,12 @@ function CategorySection(props) {
             </div>
             <div className="product-container">
               <Carousel ref={sliderRef} {...SliderSettings}>
-                <MusicCard />
-                <MusicCard />
-                <MusicCard />
-                <MusicCard />
-                <MusicCard />
-                <MusicCard />
+                <SectionCard />
+                <SectionCard />
+                <SectionCard />
+                <SectionCard />
+                <SectionCard />
+                <SectionCard />
               </Carousel>
             </div>
           </ProductSection>
@@ -70,7 +70,7 @@ const Container=styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
   align-items: center;
   margin-top: 165px;
 `
@@ -78,6 +78,7 @@ const Container=styled.div`
 const Heading=styled.div`
   width: 100%;
   height: 130px;
+  margin-bottom: -5px;
   border: 1px solid black;
   border-radius: 8px;
   display: flex;
@@ -124,7 +125,8 @@ const ProductSection=styled.div`
   width: 100%;
 
   .buttons-div {
-    height: 45px;
+    margin-bottom: 7px;
+    height: 35px;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -203,5 +205,43 @@ const ProductSection=styled.div`
 `
 
 const Carousel=styled(Slider)`
-  display:flex;
+
+  .slick-dots {
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+
+    list-style-type: none;
+
+      li {
+        margin: 0 2px;
+      }
+
+      button {
+        display: block;
+        width: 8px;
+        height: 8px;
+        padding: 0;
+        margin-top: 5px;
+
+        border: 1px solid black;
+        border-radius: 100%;
+
+        text-indent: -9999px;
+      }
+
+      li.slick-active button {
+        transform: scale(1.2);
+        background-color: black;
+      }
+
+  }
+
+  .slick-list {
+    margin: 0 -13px;
+  }
+  .slick-slide>div {
+    padding: 0 13px;
+  }
 `

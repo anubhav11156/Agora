@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-function MusicCard() {
+function SectionCard() {
     return (
         <Container>
           this is the first card
@@ -10,10 +10,10 @@ function MusicCard() {
     )
 }
 
-export default MusicCard
+export default SectionCard
 
 const Container=styled.div`
-  background-color: grey;
+  background-color: lightpink;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 360px;

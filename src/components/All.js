@@ -61,8 +61,8 @@ function All() {
             </Slide2>
           </Carousel>
         </Banner>
-        <Content>
 
+        <Content>
             <Element name="music" className="music-section">
               <div className="insideContainer">
                 <CategorySection
@@ -120,6 +120,7 @@ function All() {
               </div>
             </Element>
         </Content>
+
         <Footer />
       </Container>
     )
@@ -212,7 +213,7 @@ const Description=styled.div`
 
 `
 const Content=styled.div`
-  height: 7650px;
+  height: 7700px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
