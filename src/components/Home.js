@@ -179,7 +179,7 @@ const Buttons=styled.div`
         border: 1px solid black;
         border-radius: 25px;
         background-color: white;
-        box-shadow: 4px 4px 0px black;
+        box-shadow: 3px 3px 0px black;
         margin-bottom: 5px;
         margin-right: 5px;
       }
@@ -203,7 +203,7 @@ const Buttons=styled.div`
         border: 1px solid black;
         border-radius: 25px;
         background-color: white;
-        box-shadow: 4px 4px 0px black;
+        box-shadow: 3px 3px 0px black;
       }
     }
   }
@@ -226,7 +226,7 @@ const Buttons=styled.div`
         border: 1px solid black;
         border-radius: 25px;
         background-color: white;
-        box-shadow: 4px 4px 0px black;
+        box-shadow: 3px 3px 0px black;
       }
     }
   }

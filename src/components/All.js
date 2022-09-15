@@ -1,18 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import Music from '../components/Music'
-import Animation from '../components/Animation'
-import Ebooks from '../components/Ebooks'
-import Art from '../components/Art'
-import Podcast from '../components/Podcast'
-import Articles from '../components/Articles'
-import Films from '../components/Films'
-import Education from '../components/Education'
-
+import {SectionData} from '../CategorySectionData'
+import CategorySection from '../components/CategorySection'
+import Footer from './Footer'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Footer from './Footer'
 import {
   Link,
   Element,
@@ -72,42 +65,58 @@ function All() {
 
             <Element name="music" className="music-section">
               <div className="insideContainer">
-                <Music />
+                <CategorySection
+                  data={SectionData[0]}
+                />
               </div>
             </Element>
             <Element name="animation" className="animation-section">
               <div className="insideContainer">
-                <Animation />
+                <CategorySection
+                  data={SectionData[1]}
+                />
               </div>
             </Element>
             <Element name="ebooks" className="ebooks-section">
               <div className="insideContainer">
-                <Ebooks />
+                <CategorySection
+                  data={SectionData[2]}
+                />
               </div>
             </Element>
             <Element name="art" className="art-section">
               <div className="insideContainer">
-                <Art />
+                <CategorySection
+                  data={SectionData[3]}
+                />
               </div>
             </Element>
             <Element name="podcast" className="podcast-section">
               <div className="insideContainer">
-                <Podcast />
+                <CategorySection
+                  data={SectionData[4]}
+                />
               </div>
             </Element>
             <Element name="articles" className="articles-section">
               <div className="insideContainer">
-                <Articles />
+                <CategorySection
+                  data={SectionData[5]}
+                />
               </div>
             </Element>
             <Element name="films" className="films-section">
               <div className="insideContainer">
-                <Films />
+                <CategorySection
+                  data={SectionData[6]}
+                />
               </div>
             </Element>
             <Element name="education" className="education-section">
               <div className="insideContainer">
-                <Education />
+                <CategorySection
+                  data={SectionData[7]}
+                />
               </div>
             </Element>
         </Content>
