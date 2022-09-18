@@ -23,6 +23,8 @@ import { useEffect } from 'react'
 
 function All() {
 
+
+
   // -------------------- Fetching Nfts from Contract
 
   const [ nfts, setNfts ] = useState([]);
@@ -30,6 +32,7 @@ function All() {
   const { Moralis } = useMoralis();
 
   async function getNftData() {
+    // console.log('test for function execution ');  --> workingx
     await Moralis.enableWeb3();
     let options = {
       contractAddress: contractAddress,
@@ -64,7 +67,7 @@ function All() {
           return nft;
       })
       );
-      
+
       console.log(nftsArr);
       setNfts(nfts);
   }

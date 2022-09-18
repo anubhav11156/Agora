@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useMoralis } from 'react-moralis'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom'
 
 function Header() {
 
@@ -31,7 +32,6 @@ function Header() {
       .catch(function (error) {
         console.log("error is" ,error);
       });
-      
   }
 
   const loginHandler = async () => {
@@ -43,7 +43,6 @@ function Header() {
       logout();
       setLoginText("Login");
       setFlag(0);
-      // alert("Logged Out");
       toast.success("Logged Out", {
       position: toast.POSITION.TOP_CENTER
       });
@@ -59,8 +58,6 @@ function Header() {
       setFlag(1);
     }
   });
-
-
 
     return (
         <Container>
@@ -78,10 +75,12 @@ function Header() {
                 </p>
               </div>
               <div className="dashboard-div">
-                <p>
-                  Dashboard
-                  <div className="bar"></div>
-                </p>
+                <Link to="/dashboard">
+                  <p>
+                    Dashboard
+                    <div className="bar"></div>
+                  </p>
+                </Link>
               </div>
             </div>
           </Menu>
@@ -150,6 +149,11 @@ const Menu=styled.div`
       font-size: 18px;
       display: flex;
       justify-content: center;
+
+      a {
+        color: black;
+        text-decoration: none;
+      }
       p {
         margin: 0;
         cursor: pointer;
