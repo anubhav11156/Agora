@@ -14,7 +14,63 @@ import {
   scroller,
 } from "react-scroll";
 
+import { useMoralis } from 'react-moralis'
+import { useState } from 'react'
+import { contractAddress, contractAbi } from '../config'
+import axios from "axios";
+import { ethers } from "ethers";
+import { useEffect } from 'react'
+
 function All() {
+
+  // -------------------- Fetching Nfts from Contract
+
+  const [ nfts, setNfts ] = useState([]);
+
+  const { Moralis } = useMoralis();
+
+  async function getNftData() {
+    await Moralis.enableWeb3();
+    let options = {
+      contractAddress: contractAddress,
+      functionName: 'fetchStore',
+      abi: contractAbi.abi,
+      params: {},
+    }
+    const data = await Moralis.executeFunction(options);
+
+    const nftsArr = await Promise.all(
+      data.map(async (i) => {
+          let options = {
+            contractAddress: contractAddress,
+            functionName: 'uri',
+            abi: contractAbi.abi,
+            params: {
+              tokenId: i.tokenId.toString()
+            },
+          }
+          const tokenUri = await Moralis.executeFunction(options);
+          console.log(tokenUri)
+          const meta = await axios.get(tokenUri);
+          let price = ethers.utils.formatEther(i.price);
+          let nft = {
+              price,
+              tokenId: i.tokenId.toNumber(),
+              name: meta.data.name,
+              remaining: i.supplyleft.toNumber(),
+              cover: meta.data.cover,
+              category: ''
+          };
+          return nft;
+      })
+      );
+      
+      console.log(nftsArr);
+      setNfts(nfts);
+  }
+
+  // --------------------
+
 
   let settings = {
     dots: false,
@@ -69,6 +125,7 @@ function All() {
                   data={SectionData[0]}
                 />
               </div>
+              <button onClick={getNftData}>dfadsfffasdf</button>
             </Element>
             <Element name="animation" className="animation-section">
               <div className="insideContainer">

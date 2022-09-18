@@ -11,7 +11,7 @@ function CategorySection(props) {
   const data = props.data;
 
   const sliderRef = useRef(null);
-  console.log(sliderRef);
+  // console.log(sliderRef);
   const next = () => sliderRef.current.slickNext();
   const prev = () => sliderRef.current.slickPrev();
 

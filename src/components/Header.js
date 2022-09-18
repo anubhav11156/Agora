@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import { useMoralis } from 'react-moralis'
@@ -8,24 +9,20 @@ function Header() {
 
   // for login and logout
   const [loginStatus, setLoginStatus] = useState(false);
-  const [loginText, setLogintext] = useState("Login");
+  const [loginText, setLoginText] = useState("Login");
   const [flag, setFlag] = useState(0); // this is used so that login occurs only once.
 
   const {
     authenticate,
     isAuthenticated,
-    user,
-    isWeb3Enabled,
-    enableWeb3,
-    Moralis,
     logout
   } = useMoralis();
 
-  const authenticateFucntion = async () => {
+  const authenticateFunction = async () => {
     await authenticate({
       provider: "web3Auth",
       clientId: "BEKdZ7Wk_JPGM_MbJcYrFk0HMqOzQ0W_-40hzCXJv3H2KINDeMfpW--J-BOTYSBEbQcVr_oaqpY-yNlk-9On88c",
-      chainId: "0x4",
+      chainId: "0x13881",
       signingMessage:"agora authentication"
     })
       .then(function (user) {
@@ -34,16 +31,17 @@ function Header() {
       .catch(function (error) {
         console.log("error is" ,error);
       });
+      
   }
 
   const loginHandler = async () => {
     if(isAuthenticated == false){
       // login
-      await authenticateFucntion();
+      await authenticateFunction();
     }
     else if(isAuthenticated == true ){
       logout();
-      setLogintext("Login");
+      setLoginText("Login");
       setFlag(0);
       // alert("Logged Out");
       toast.success("Logged Out", {
@@ -54,7 +52,7 @@ function Header() {
 
   useEffect(() => {
     if(isAuthenticated && flag==0){
-      setLogintext("Logout");
+      setLoginText("Logout");
       toast.success("Logged In", {
         position: toast.POSITION.TOP_CENTER
       });
