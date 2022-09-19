@@ -2,6 +2,7 @@ import React, {useState, useEffect }from 'react'
 import styled from 'styled-components'
 import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/micah';
+import Publish from './Publish'
 
 function Dashboard() {
 
@@ -19,7 +20,6 @@ function Dashboard() {
     setIsPublishClicked(true);
   }
 
-  console.log(isPublishClicked);
     return (
         <Container>
           <SideBar>
@@ -43,17 +43,7 @@ function Dashboard() {
             <div className="welcome-div">
               <p>Hi there, Welcome to agora</p>
             </div>
-            <Options>
-              <div className="heading">
-                <div className="icon-div">
-                  <img src="/images/publish-logo.png" />
-                </div>
-                <div className="text-div">
-                  <p className="title">Publish & Mint</p>
-                  <p className="description">Make some selections, fill in some boxes, and make your NFT live in minutes.</p>
-                </div>
-              </div>
-            </Options>
+            <Publish />
           </MainSection>
         </Container>
     )
@@ -63,7 +53,7 @@ export default Dashboard
 
 const Container=styled.div`
   width: 100%;
-  height: 100vh;
+  height: 150vh;
   position: relative;
   background-color: rgba(244,245,240,255);
 `
@@ -179,53 +169,5 @@ const MainSection=styled.div`
       font-size: 50px;
     }
 
-  }
-`
-
-const Options=styled.div`
-  margin-top: 40px;
-  padding-left: 60px;
-  background-color: lightpink;
-  height: 100vh;
-
-  .heading {
-    width: 1100px;
-    height: 80px;
-    margin-bottom: -5px;
-    border: 1px solid black;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(35, 160, 148, 1);
-
-    .icon-div {
-      width: 53px;
-      display: flex;
-      justify-content: center;
-      margin-left: 20px;
-
-      img {
-        width: 95%;
-      }
-    }
-
-    .text-div {
-      flex: 1;
-      margin-left: 25px;
-
-      .title {
-        margin: 0;
-        font-family: Mabry-medium;
-        font-size: 26px;
-      }
-
-      .description {
-        margin-top: 12px;
-        margin-bottom: 0;
-        font-family: Mabry-Regular;
-        font-size: 17px;
-      }
-    }
   }
 `
