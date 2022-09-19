@@ -25,6 +25,8 @@ import { useEffect } from 'react'
 
 function All() {
 
+
+
   // -------------------- Fetching Nfts from Contract
 
   const [ nfts, setNfts ] = useState([]);

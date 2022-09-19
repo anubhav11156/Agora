@@ -129,7 +129,7 @@ const Container=styled.div`
   width: 100%;
   height:auto;
   overflow-x: hidden;
-    background-color: rgba(244,245,240,255);
+  background-color: rgba(244,245,240,255);
 `
 const ButtonWrapper=styled.div`
   position:fixed;
