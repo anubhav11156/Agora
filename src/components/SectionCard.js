@@ -1,16 +1,44 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import styled from 'styled-components'
+import { contractAddress, contractAbi } from '../config'
+import { useMoralis } from 'react-moralis'
+import web3modal from "web3modal";
+import { ethers } from "ethers";
 
 
-function SectionCard() {
+function SectionCard(prop) {
+
+  async function buy() {
+      const modal = new web3modal({
+          network: "mumbai",
+          cacheProvider: true,
+      });
+      const connection = await modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+          contractAddress,
+          contractAbi.abi,
+          signer
+      );
+      const price = ethers.utils.parseUnits(prop.price.toString(), "ether");
+      const transaction = await contract.buy(prop.tokenId, {
+          value: price,
+          gasLimit: 1000000,
+      });
+      await transaction.wait();
+  }
+
     return (
         <Container>
           <BgImage>
-            <img className="coverImg" src="/images/profile-5.jpg"/>
+            <img className="coverImg" src={prop.cover}/>
+            {/* {console.log(prop.cover)} */}
           </BgImage>
           <Detail>
             <div className="title-div">
-              <p>Pillar of Autumn</p>
+              <p>{prop.name}</p>
             </div>
             <div  className="middle">
               <div className="left">
@@ -20,18 +48,18 @@ function SectionCard() {
                     <img src="images/polygon-color.png" />
                   </div>
                   <div className="amount-div">
-                    <p>8.7</p>
+                    <p>{prop.price}</p>
                   </div>
                 </div>
               </div>
               <div className="right">
                 <p className="remaining-text">Remaining</p>
                 <div className="token-status">
-                  7/10
+                  {prop.remaining}
                 </div>
               </div>
             </div>
-            <BuyButton>Buy Now</BuyButton>
+            <BuyButton onClick={buy}>Buy Now</BuyButton>
           </Detail>
         </Container>
     )

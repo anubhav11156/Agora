@@ -9,6 +9,7 @@ import SectionCard from '../components/SectionCard'
 function CategorySection(props) {
 
   const data = props.data;
+  const nft = props.items;
 
   const sliderRef = useRef(null);
   // console.log(sliderRef);
@@ -25,6 +26,8 @@ function CategorySection(props) {
     autoplay: false,
     autoplaySpeed: 4000
   }
+
+  if (!nft) return null
     return (
         <Container>
           <Heading bgColor={data.bgColor}>
@@ -51,12 +54,14 @@ function CategorySection(props) {
             </div>
             <div className="product-container">
               <Carousel ref={sliderRef} {...SliderSettings}>
+              {nft.map( (token, i) => (
+                <SectionCard tokenId={token.tokenId} cover={token.cover} name={token.name} price={token.price} remaining={token.remaining}/>
+              ))}
+                {/* <SectionCard />
                 <SectionCard />
                 <SectionCard />
                 <SectionCard />
-                <SectionCard />
-                <SectionCard />
-                <SectionCard />
+                <SectionCard /> */}
               </Carousel>
             </div>
           </ProductSection>

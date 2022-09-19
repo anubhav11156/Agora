@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import styled from 'styled-components'
 import {SectionData} from '../CategorySectionData'
@@ -26,11 +28,30 @@ function All() {
   // -------------------- Fetching Nfts from Contract
 
   const [ nfts, setNfts ] = useState([]);
+  // price name remaining cover category
+  const [ musicNfts, setMusicNfts ] = useState([]);
+  const [ animationNfts, setAnimationNfts ] = useState([]);
+  const [ ebooksNfts, setEbooksNfts ] = useState([]);
+  const [ artNfts, setArtNfts ] = useState([]);
+  const [ podcastNfts, setPodcastNfts ] = useState([]);
+  const [ articlesNfts, setArticleNfts ] = useState([]);
+  const [ filmsNfts, setFilmsNfts ] = useState([]);
+  const [ educationNfts, setEducationNfts ] = useState([]);
 
   const { Moralis } = useMoralis();
 
+  useEffect(() => {
+    getNftData()
+  }, [])
+
   async function getNftData() {
-    await Moralis.enableWeb3();
+    await Moralis.enableWeb3({
+      provider: "web3Auth",
+      clientId: "BEKdZ7Wk_JPGM_MbJcYrFk0HMqOzQ0W_-40hzCXJv3H2KINDeMfpW--J-BOTYSBEbQcVr_oaqpY-yNlk-9On88c",
+      chainId: "0x13881",
+      signingMessage:"agora authentication"
+    }
+    );
     let options = {
       contractAddress: contractAddress,
       functionName: 'fetchStore',
@@ -50,7 +71,6 @@ function All() {
             },
           }
           const tokenUri = await Moralis.executeFunction(options);
-          console.log(tokenUri)
           const meta = await axios.get(tokenUri);
           let price = ethers.utils.formatEther(i.price);
           let nft = {
@@ -65,8 +85,62 @@ function All() {
       })
       );
       
-      console.log(nftsArr);
-      setNfts(nfts);
+      setNfts(nftsArr);
+      filterNFts();
+      // console.log(nfts);
+  }
+
+  function filterNFts() {
+    nfts.map( (nft) => {
+      // if (nft.category === "music") {
+      //   setMusicNfts(oldArray => [...oldArray, nft]);
+      // }
+      // if (nft.category === "animation") {
+      //   setAnimationNfts(oldArray => [...oldArray, nft]);
+      // }
+      // if (nft.category === "ebooks") {
+      //   setEbooksNfts(oldArray => [...oldArray, nft]);
+      // }
+      // if (nft.category === "art") {
+      //   setArtNfts(oldArray => [...oldArray, nft]);
+      // }
+      // if (nft.category === "podcast") {
+      //   setPodcastNfts(oldArray => [...oldArray, nft]);
+      // }
+      // if (nft.category === "articles") {
+      //   setArticleNfts(oldArray => [...oldArray, nft]);
+      // }
+      // if (nft.category === "films") {
+      //   setFilmsNfts(oldArray => [...oldArray, nft]);
+      // }
+      // if (nft.category === "education") {
+      //   setEducationNfts(oldArray => [...oldArray, nft]);
+      // }
+      if (nft.category === "") {
+        setMusicNfts(oldArray => [...oldArray, nft]);
+      }
+      if (nft.category === "") {
+        setAnimationNfts(oldArray => [...oldArray, nft]);
+      }
+      if (nft.category === "") {
+        setEbooksNfts(oldArray => [...oldArray, nft]);
+      }
+      if (nft.category === "") {
+        setArtNfts(oldArray => [...oldArray, nft]);
+      }
+      if (nft.category === "") {
+        setPodcastNfts(oldArray => [...oldArray, nft]);
+      }
+      if (nft.category === "") {
+        setArticleNfts(oldArray => [...oldArray, nft]);
+      }
+      if (nft.category === "") {
+        setFilmsNfts(oldArray => [...oldArray, nft]);
+      }
+      if (nft.category === "") {
+        setEducationNfts(oldArray => [...oldArray, nft]);
+      }
+    })
   }
 
   // --------------------
@@ -123,14 +197,18 @@ function All() {
               <div className="insideContainer">
                 <CategorySection
                   data={SectionData[0]}
+                  items={musicNfts}
                 />
               </div>
-              <button onClick={getNftData}>dfadsfffasdf</button>
+                {/* {console.log(nfts[0])} */}
+              <button onClick={getNftData}>getNftData</button>
+              <button onClick={filterNFts}>filterNFts</button>
             </Element>
             <Element name="animation" className="animation-section">
               <div className="insideContainer">
                 <CategorySection
                   data={SectionData[1]}
+                  items={animationNfts}
                 />
               </div>
             </Element>
@@ -138,6 +216,7 @@ function All() {
               <div className="insideContainer">
                 <CategorySection
                   data={SectionData[2]}
+                  items={ebooksNfts}
                 />
               </div>
             </Element>
@@ -145,6 +224,7 @@ function All() {
               <div className="insideContainer">
                 <CategorySection
                   data={SectionData[3]}
+                  items={artNfts}
                 />
               </div>
             </Element>
@@ -152,6 +232,7 @@ function All() {
               <div className="insideContainer">
                 <CategorySection
                   data={SectionData[4]}
+                  items={podcastNfts}
                 />
               </div>
             </Element>
@@ -159,6 +240,7 @@ function All() {
               <div className="insideContainer">
                 <CategorySection
                   data={SectionData[5]}
+                  items={articlesNfts}
                 />
               </div>
             </Element>
@@ -166,6 +248,7 @@ function All() {
               <div className="insideContainer">
                 <CategorySection
                   data={SectionData[6]}
+                  items={filmsNfts}
                 />
               </div>
             </Element>
@@ -173,6 +256,7 @@ function All() {
               <div className="insideContainer">
                 <CategorySection
                   data={SectionData[7]}
+                  items={educationNfts}
                 />
               </div>
             </Element>
