@@ -5,6 +5,9 @@
   "dependencies": {
     "@dicebear/avatars": "^4.10.5",
     "@dicebear/micah": "^4.10.5",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/joy": "^5.0.0-alpha.46",
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "@nomiclabs/hardhat-ethers": "^2.1.1",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
@@ -17,6 +20,7 @@
     "chai": "^4.3.6",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.7.1",
+    "glamor": "^2.20.40",
     "hardhat": "^2.11.2",
     "moralis-v1": "^1.11.0",
     "react": "^18.2.0",
@@ -28,11 +32,13 @@
     "react-scroll": "^1.8.7",
     "react-scroll-to-top": "^3.0.0",
     "react-slick": "^0.29.0",
+    "react-spinners": "^0.13.4",
     "react-toastify": "^9.0.8",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
     "sweetalert2": "^11.4.32",
     "web-vitals": "^2.1.4",
+    "web3.storage": "^4.4.0",
     "web3modal": "^1.9.9"
   },
   "scripts": {
