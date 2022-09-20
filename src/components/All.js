@@ -47,21 +47,24 @@ function All() {
   }, [])
 
   async function getNftData() {
-    await Moralis.enableWeb3({
-      provider: "web3Auth",
-      clientId: "BEKdZ7Wk_JPGM_MbJcYrFk0HMqOzQ0W_-40hzCXJv3H2KINDeMfpW--J-BOTYSBEbQcVr_oaqpY-yNlk-9On88c",
-      chainId: "0x13881",
-      signingMessage:"agora authentication"
-    }
-    );
+    // await Moralis.enableWeb3({
+    //   provider: "web3Auth",
+    //   clientId: "BEKdZ7Wk_JPGM_MbJcYrFk0HMqOzQ0W_-40hzCXJv3H2KINDeMfpW--J-BOTYSBEbQcVr_oaqpY-yNlk-9On88c",
+    //   chainId: "0x13881",
+    //   signingMessage:"agora authentication"
+    // }
+    // );
+    const web3 = await Moralis.enableWeb3();
+    // this is for fetching the nft data form the samrt contarct as an array
     let options = {
       contractAddress: contractAddress,
       functionName: 'fetchStore',
       abi: contractAbi.abi,
       params: {},
     }
-    const data = await Moralis.executeFunction(options);
 
+    const data = await Moralis.executeFunction(options);
+    // console.log(data);
     const nftsArr = await Promise.all(
       data.map(async (i) => {
           let options = {
@@ -86,7 +89,8 @@ function All() {
           return nft;
       })
       );
-      
+
+      console.log('nft array is : ', nftsArr);
       setNfts(nftsArr);
       filterNFts();
       // console.log(nfts);

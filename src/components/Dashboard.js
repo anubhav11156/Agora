@@ -3,12 +3,21 @@ import styled from 'styled-components'
 import { createAvatar } from '@dicebear/avatars';
 import * as style from '@dicebear/micah';
 import Publish from './Publish'
+import Products from './Products'
+import Inventory from './Inventory'
+import { useLocation } from 'react-router-dom'
 
 function Dashboard() {
 
+
+  // use useLocation and extract state from the parms which was passed from the homepage
+  const {state} = useLocation();
+  const accountAddress = state.accountAddress;
+  console.log(accountAddress);
+
   const avatar = createAvatar( style, {
     dataUri: true,
-    seed: "0x22b6Dd4D6d818e2Ebce3D2E009A249F8FbF4e965"
+    seed: `${accountAddress}`
   });
 
   const [isPublishClicked, setIsPublishClicked] = useState(false);
@@ -16,10 +25,22 @@ function Dashboard() {
   const [isInventoryClicked, setIsInventoryClicked] = useState(false);
 
   const publishHandle = () => {
-    console.log('u clicked publish button');
+    setIsProductClicked(false);
+    setIsInventoryClicked(false);
     setIsPublishClicked(true);
   }
 
+  const productHandle = () => {
+    setIsInventoryClicked(false);
+    setIsPublishClicked(false);
+    setIsProductClicked(true);
+  }
+
+  const inventoryHandle = () => {
+    setIsProductClicked(false);
+    setIsPublishClicked(false);
+    setIsInventoryClicked(true);
+  }
     return (
         <Container>
           <SideBar>
@@ -30,20 +51,22 @@ function Dashboard() {
                 </div>
               </div>
               <div className="address-div">
-                <div className="address">0x22b6Dd4D6d818e2Ebce3D2E009A249F8FbF4e965</div>
+                <div className="address">{accountAddress}</div>
               </div>
             </div>
             <div className="options-section">
               <button className="publish-button" onClick={publishHandle}>Publish</button>
-              <button className="products-button">Products</button>
-              <button className="inventory-button">Inventory</button>
+              <button className="products-button" onClick={productHandle}>Products</button>
+              <button className="inventory-button" onClick={inventoryHandle}>Inventory</button>
             </div>
           </SideBar>
           <MainSection>
             <div className="welcome-div">
               <p>Hi there, Welcome to agora</p>
             </div>
-            <Publish />
+            { isPublishClicked &&
+              <Publish />
+            }
           </MainSection>
         </Container>
     )

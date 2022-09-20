@@ -9,6 +9,7 @@ import { ethers } from "ethers";
 
 function SectionCard(prop) {
 
+  // if user is authenticated then execute by option else say to conncect wallet 
   async function buy() {
       const modal = new web3modal({
           network: "mumbai",
