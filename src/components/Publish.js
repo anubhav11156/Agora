@@ -1,8 +1,15 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, CSSProperties } from 'react'
 import styled from 'styled-components'
 import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js';
 import { ToastContainer, toast } from 'react-toastify';
 import BarLoader from "react-spinners/BarLoader";
+import { useMoralis } from 'react-moralis';
+// import { contractAddress, contractAbi } from '../config'
+import { contractAddress } from "../address.js";
+import { contractAbi } from "../config";
+import web3modal from "web3modal";
+import { ethers } from "ethers";
 
 function Publish() {
 
@@ -23,6 +30,9 @@ function Publish() {
     coverImageURI:"",
     contentURI:""
   });
+
+  async function upload() {
+  }
 
   console.log(formInput);
 
@@ -206,8 +216,27 @@ function Publish() {
 
   /*--------Here write the code for minting the NFT--------*/
 
-  const mintToken = () => {
+  const { Moralis } = useMoralis();
+
+  const mintToken = async () => {
     // write the mint logic
+    const modal = new web3modal({
+      network: "mumbai",
+      cacheProvider: true,
+  });
+  const connection = await modal.connect();
+  const provider = new ethers.providers.Web3Provider(connection);
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(
+      contractAddress,
+      contractAbi.abi,
+      signer
+  );
+  const price = ethers.utils.parseEther(formInput.price);
+  const publish = await contract.createToken(formInput.contentURI, formInput.supply, price, formInput.category, {
+      gasLimit: 1000000,
+  });
+  await publish.wait();
   }
 
   /*------------------------------------------------------*/

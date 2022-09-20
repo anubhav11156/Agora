@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import styled from 'styled-components'
-import { contractAddress, contractAbi } from '../config'
+// import { contractAddress, contractAbi } from '../config'
+import { contractAddress } from "../address.js";
+import { contractAbi } from "../config";
 import { useMoralis } from 'react-moralis'
 import web3modal from "web3modal";
 import { ethers } from "ethers";
@@ -9,7 +11,7 @@ import { ethers } from "ethers";
 
 function SectionCard(prop) {
 
-  // if user is authenticated then execute by option else say to conncect wallet 
+  // if user is authenticated then execute by option else say to connect wallet 
   async function buy() {
       const modal = new web3modal({
           network: "mumbai",

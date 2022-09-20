@@ -18,7 +18,9 @@ import {
 
 import { useMoralis } from 'react-moralis'
 import { useState } from 'react'
-import { contractAddress, contractAbi } from '../config'
+// import { contractAddress, contractAbi } from '../config'
+import { contractAddress } from "../address.js";
+import { contractAbi } from "../config";
 import axios from "axios";
 import { ethers } from "ethers";
 import { useEffect } from 'react'
