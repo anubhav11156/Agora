@@ -163,7 +163,7 @@ function Publish() {
     setIsArticlesActive(true);
     setFormInput({
       ...formInput,
-      category: 'Aritcles'
+      category: 'Articles'
     })
   }
 
@@ -228,12 +228,11 @@ function Publish() {
       new File([data], 'data.json')
     ]
     const metaCID = await uploadToIPFS(files);
-    console.log("metacid",metaCID);
     console.log('meta', `https://ipfs.io/ipfs/${metaCID}/data.json`)
-    // return `https://ipfs.io/ipfs/${metaCID}`
+    return `https://ipfs.io/ipfs/${metaCID}/data.json`
   }
 
-  metadata();
+  // metadata();
   /* ---------------------------------------------------- */
 
       // ------- infura ipfs

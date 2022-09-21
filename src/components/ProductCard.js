@@ -1,22 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function ProductCard() {
+function ProductCard(prop) {
     return (
         <Container>
           <LeftCompartment>
             <div className="image-container">
-              <img src="/images/profile-5.jpg"/>
+              <img src={prop.cover}/>
             </div>
           </LeftCompartment>
           <RightCompartment>
             <div className="tokenID-div">
-              <p className="tokenNumber"># 1</p>
+              <p className="tokenNumber"># {prop.tokenId}</p>
               <p className="dot">&#8226;</p>
               <p className="tokenType">Non-Fungible</p>
             </div>
             <div className="name-div">
-              <p>psyk-Thel'vedem</p>
+              <p>{prop.name}</p>
             </div>
             <div className="price-type-div">
               <div className="price">
@@ -24,23 +24,23 @@ function ProductCard() {
                   <img src="/images/polygon-black.png"/>
                 </div>
                 <div className="matic">
-                  <p>3.8</p>
+                  <p>{prop.price}</p>
                 </div>
               </div>
               <div className="type">
-                <p>Art</p>
+                <p>{prop.category}</p>
               </div>
             </div>
-            <div className="supply-sold">
+            {/* <div className="supply-sold">
               <div className="supply">
                 <p>Total supply :</p>
-                <p className="count">200</p>
+                <p className="count">28</p>
               </div>
               <div className="sold">
                 <p>Sold :</p>
                 <p className="count">10</p>
               </div>
-            </div>
+            </div> */}
           </RightCompartment>
         </Container>
     )

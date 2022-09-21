@@ -44,9 +44,9 @@ function All() {
   const { Moralis, isAuthenticated } = useMoralis();
 
   useEffect(() => {
-    if(isAuthenticated){
+    // if(isAuthenticated){
       getNftData()
-    }
+    // }
   }, [])
 
   async function getNftData() {
@@ -55,9 +55,8 @@ function All() {
     //   clientId: "BEKdZ7Wk_JPGM_MbJcYrFk0HMqOzQ0W_-40hzCXJv3H2KINDeMfpW--J-BOTYSBEbQcVr_oaqpY-yNlk-9On88c",
     //   chainId: "0x13881",
     //   signingMessage:"agora authentication"
-    // }
-    // );
-    const web3 = await Moralis.enableWeb3();
+    // });
+    await Moralis.enableWeb3();
     // this is for fetching the nft data form the smart contract as an array
     let options = {
       contractAddress: contractAddress,
@@ -65,16 +64,6 @@ function All() {
       abi: contractAbi.abi,
       params: {},
     }
-
-
-    // meta data
-    // uri contains metadata
-
-    // {
-    //   name: 'fasdf',
-    //   contentURL: 'dfsdfdsfasf',
-    //   coverURL: 'dfsdfdsfasf',
-    // }
 
     const data = await Moralis.executeFunction(options);
     const nftsArr = await Promise.all(
@@ -88,21 +77,24 @@ function All() {
             },
           }
           const tokenUri = await Moralis.executeFunction(options);
-          console.log(tokenUri)
           const meta = await axios.get(tokenUri);
+          console.log(meta.data.contentURI)
           let price = ethers.utils.formatEther(i.price);
           let nft = {
               price,
               tokenId: i.tokenId.toNumber(),
               name: meta.data.name,
               remaining: i.supplyleft.toNumber(),
-              cover: meta.data.cover,
-              category: meta.data.category
+              cover: meta.data.contentURI,
+              // cover: meta.data.coverImageURI,
+              category: i.category
           };
           return nft;
       })
       );
       console.log('nft array is : ', nftsArr);
+      setNfts(nftsArr);
+      filterNFts();
   }
 
   function filterNFts() {

@@ -1,7 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ProductCard from './ProductCard'
+import { useMoralis } from 'react-moralis'
+import { contractAddress } from "../address.js";
+import { contractAbi } from "../config";
+import axios from "axios";
+import { ethers } from "ethers";
+
 function Products() {
+  
+  const [nfts, setNfts] = useState([])
+
+  const { Moralis } = useMoralis();
+
+  useEffect(() => {
+    getNftData()
+  }, [])
+
+  async function getNftData() {
+    await Moralis.enableWeb3();
+    let options = {
+      contractAddress: contractAddress,
+      functionName: 'fetchStore',
+      abi: contractAbi.abi,
+      params: {},
+    }
+
+    const data = await Moralis.executeFunction(options);
+    const nftsArr = await Promise.all(
+      data.map(async (i) => {
+          let options = {
+            contractAddress: contractAddress,
+            functionName: 'uri',
+            abi: contractAbi.abi,
+            params: {
+              tokenId: i.tokenId.toString()
+            },
+          }
+          const tokenUri = await Moralis.executeFunction(options);
+          // console.log(tokenUri)
+          const meta = await axios.get(tokenUri);
+          let price = ethers.utils.formatEther(i.price);
+          let nft = {
+              price,
+              tokenId: i.tokenId.toNumber(),
+              name: meta.data.name,
+              remaining: i.supplyleft.toNumber(),
+              cover: meta.data.coverImageURI,
+              category: i.category
+          };
+          return nft;
+      })
+      );
+
+      console.log('nft array is : ', nftsArr);
+      setNfts(nftsArr);
+  }
+  
     return (
         <Container>
           <div className="heading">
@@ -14,10 +69,13 @@ function Products() {
             </div>
           </div>
           <ProductList>
+          {nfts.map( (token, i) => (
+                <ProductCard tokenId={token.tokenId} cover={token.cover} name={token.name} price={token.price} category={token.category}/>
+              ))}
+            {/* <ProductCard />
             <ProductCard />
             <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <ProductCard /> */}
           </ProductList>
         </Container>
     )
