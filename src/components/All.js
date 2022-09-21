@@ -70,11 +70,11 @@ function All() {
     // meta data
     // uri contains metadata
 
-    {
-      name: 'fasdf',
-      contentURL: 'dfsdfdsfasf',
-      coverURL: 'dfsdfdsfasf',
-    }
+    // {
+    //   name: 'fasdf',
+    //   contentURL: 'dfsdfdsfasf',
+    //   coverURL: 'dfsdfdsfasf',
+    // }
 
     const data = await Moralis.executeFunction(options);
     const nftsArr = await Promise.all(

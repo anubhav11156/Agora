@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, CSSProperties } from 'react'
 import styled from 'styled-components'
-import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js';
+import { Web3Storage, File } from 'web3.storage/dist/bundle.esm.min.js';
 import { ToastContainer, toast } from 'react-toastify';
 import BarLoader from "react-spinners/BarLoader";
 import { useMoralis } from 'react-moralis';
@@ -214,15 +214,26 @@ function Publish() {
   }
 
   const metadata = async () => {
+    console.log("testing");
     const {name, price, coverImageURI, contentURI} = formInput;
     if (!name || !price || !coverImageURI || !contentURI) return;
+    // console.log('testing afre json');
     const data = JSON.stringify({ name, coverImageURI, contentURI });
-    console.log(data)
-    const metaCID = await uploadToIPFS(data);
-    console.log('meta', `https://ipfs.io/ipfs/${metaCID}/meta.json`)
-    return `https://ipfs.io/ipfs/${metaCID}`
+    // console.log("stringify data",data)
+
+    // const buffer = Buffer.from(JSON.stringify(data))
+    // console.log("buffer is", buffer);
+    const files = [
+      // new File(['contents-of-file-1'], 'plain-utf8.txt'),
+      new File([data], 'data.json')
+    ]
+    const metaCID = await uploadToIPFS(files);
+    console.log("metacid",metaCID);
+    console.log('meta', `https://ipfs.io/ipfs/${metaCID}/data.json`)
+    // return `https://ipfs.io/ipfs/${metaCID}`
   }
 
+  metadata();
   /* ---------------------------------------------------- */
 
       // ------- infura ipfs
@@ -230,11 +241,11 @@ function Publish() {
     //   const projectId = `2F5SZBsOjULuF87T9JOznLFNUD5`
     //   const projectSecret = `16a6ff76691974f268dc48ceef175436`
     //   const ipfsGateway = "https://agora.infura-ipfs.io/ipfs/"
-  
+
     //   const auth =
     //       "Basic " +
     //       Buffer.from(projectId + ":" + projectSecret).toString("base64");
-  
+
     //   const client = ipfsClient.create({
     //       host: "ipfs.infura.io",
     //       port: 5001,
@@ -256,7 +267,7 @@ function Publish() {
     //         console.log("Error uploading:", error);
     //     }
     // }
-  
+
       // -------
 
 
