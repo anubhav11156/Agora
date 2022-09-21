@@ -10,6 +10,8 @@ import { contractAddress } from "../address.js";
 import { contractAbi } from "../config";
 import web3modal from "web3modal";
 import { ethers } from "ethers";
+// const ipfsClient = require("ipfs-http-client");
+// import ipfsClient from 'ipfs-http-client';
 
 function Publish() {
 
@@ -27,8 +29,8 @@ function Publish() {
     price:"",
     category:"",
     supply:"",
-    coverImageURI:"",
-    contentURI:""
+    coverImageURI:null,
+    contentURI:null
   });
 
   async function upload() {
@@ -211,13 +213,58 @@ function Publish() {
     return cid
   }
 
+  const metadata = async () => {
+    const {name, price, coverImageURI, contentURI} = formInput;
+    if (!name || !price || !coverImageURI || !contentURI) return;
+    const data = JSON.stringify({ name, coverImageURI, contentURI });
+    console.log(data)
+    const metaCID = await uploadToIPFS(data);
+    console.log('meta', `https://ipfs.io/ipfs/${metaCID}/meta.json`)
+    return `https://ipfs.io/ipfs/${metaCID}`
+  }
+
   /* ---------------------------------------------------- */
+
+      // ------- infura ipfs
+
+    //   const projectId = `2F5SZBsOjULuF87T9JOznLFNUD5`
+    //   const projectSecret = `16a6ff76691974f268dc48ceef175436`
+    //   const ipfsGateway = "https://agora.infura-ipfs.io/ipfs/"
+  
+    //   const auth =
+    //       "Basic " +
+    //       Buffer.from(projectId + ":" + projectSecret).toString("base64");
+  
+    //   const client = ipfsClient.create({
+    //       host: "ipfs.infura.io",
+    //       port: 5001,
+    //       protocol: "https",
+    //       headers: {
+    //           authorization: auth,
+    //       },
+    //   });
+
+    //   async function metadata() {
+    //     const {name, price, coverImageURI, contentURI} = formInput;
+    //     if (!name || !price || !coverImageURI || !coverImageURI) return;
+    //     const data = JSON.stringify({ name, coverImageURI, contentURI });
+    //     try {
+    //         const added = await client.add(data);
+    //         const metaUrl = `${ipfsGateway}${added.path}`;
+    //         return metaUrl;
+    //     } catch (error) {
+    //         console.log("Error uploading:", error);
+    //     }
+    // }
+  
+      // -------
 
 
   /*--------Here write the code for minting the NFT--------*/
 
   const mintToken = async () => {
     // write the mint logic
+    const uri = await metadata();
     const modal = new web3modal({
       network: "mumbai",
       cacheProvider: true,
@@ -231,7 +278,7 @@ function Publish() {
       signer
   );
   const price = ethers.utils.parseEther(formInput.price);
-  const publish = await contract.createToken(formInput.contentURI, formInput.supply, price, formInput.category, {
+  const publish = await contract.createToken(uri, formInput.supply, price, formInput.category, {
       gasLimit: 1000000,
   });
   await publish.wait();
