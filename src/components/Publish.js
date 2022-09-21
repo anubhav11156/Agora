@@ -46,7 +46,7 @@ function Publish() {
     setIsAnimationActive(true);
     setFormInput({
       ...formInput,
-      category: 'animation'
+      category: 'Animation'
     })
   }
 
@@ -61,7 +61,7 @@ function Publish() {
     setIsMusicActive(true);
     setFormInput({
       ...formInput,
-      category: 'music'
+      category: 'Music'
     })
   }
 
@@ -76,7 +76,7 @@ function Publish() {
     setIsEbooksActive(true);
     setFormInput({
       ...formInput,
-      category: 'ebooks'
+      category: 'Ebooks'
     })
   }
 
@@ -91,7 +91,7 @@ function Publish() {
     setIsPodcastActive(true);
     setFormInput({
       ...formInput,
-      category: 'podcast'
+      category: 'Podcast'
     })
   }
 
@@ -106,7 +106,7 @@ function Publish() {
     setIsEducationActive(true);
     setFormInput({
       ...formInput,
-      category: 'education'
+      category: 'Education'
     })
   }
 
@@ -121,7 +121,7 @@ function Publish() {
     setIsFilmsActive(true);
     setFormInput({
       ...formInput,
-      category: 'films'
+      category: 'Films'
     })
   }
 
@@ -136,7 +136,7 @@ function Publish() {
     setIsDrawingActive(true);
     setFormInput({
       ...formInput,
-      category: 'art'
+      category: 'Art'
     })
   }
 
@@ -151,7 +151,7 @@ function Publish() {
     setIsArticlesActive(true);
     setFormInput({
       ...formInput,
-      category: 'aritcles'
+      category: 'Aritcles'
     })
   }
 

@@ -20,7 +20,7 @@ function Dashboard() {
     seed: `${accountAddress}`
   });
 
-  const [isPublishClicked, setIsPublishClicked] = useState(false);
+  const [isPublishClicked, setIsPublishClicked] = useState(true);
   const [isProducClicked, setIsProductClicked] = useState(false);
   const [isInventoryClicked, setIsInventoryClicked] = useState(false);
 
@@ -28,18 +28,21 @@ function Dashboard() {
     setIsProductClicked(false);
     setIsInventoryClicked(false);
     setIsPublishClicked(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   const productHandle = () => {
     setIsInventoryClicked(false);
     setIsPublishClicked(false);
     setIsProductClicked(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   const inventoryHandle = () => {
     setIsProductClicked(false);
     setIsPublishClicked(false);
     setIsInventoryClicked(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
     return (
         <Container>
@@ -66,6 +69,12 @@ function Dashboard() {
             </div>
             { isPublishClicked &&
               <Publish />
+            }
+            { isProducClicked &&
+              <Products />
+            }
+            { isInventoryClicked &&
+              <Inventory />
             }
           </MainSection>
         </Container>
