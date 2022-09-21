@@ -23,6 +23,7 @@
     "file-saver": "^2.0.5",
     "glamor": "^2.20.40",
     "hardhat": "^2.11.2",
+    "ipfs-http-client": "^58.0.0",
     "moralis-v1": "^1.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

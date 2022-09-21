@@ -58,12 +58,22 @@ function All() {
     // }
     // );
     const web3 = await Moralis.enableWeb3();
-    // this is for fetching the nft data form the samrt contarct as an array
+    // this is for fetching the nft data form the smart contract as an array
     let options = {
       contractAddress: contractAddress,
       functionName: 'fetchStore',
       abi: contractAbi.abi,
       params: {},
+    }
+
+
+    // meta data
+    // uri contains metadata
+
+    {
+      name: 'fasdf',
+      contentURL: 'dfsdfdsfasf',
+      coverURL: 'dfsdfdsfasf',
     }
 
     const data = await Moralis.executeFunction(options);
@@ -87,7 +97,7 @@ function All() {
               name: meta.data.name,
               remaining: i.supplyleft.toNumber(),
               cover: meta.data.cover,
-              category: i.category
+              category: meta.data.category
           };
           return nft;
       })
@@ -101,28 +111,28 @@ function All() {
 
   function filterNFts() {
     nfts.map( (nft) => {
-      if (nft.category === "music") {
+      if (nft.category === "Music") {
         setMusicNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "animation") {
+      if (nft.category === "Animation") {
         setAnimationNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "ebooks") {
+      if (nft.category === "Ebooks") {
         setEbooksNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "art") {
+      if (nft.category === "Art") {
         setArtNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "podcast") {
+      if (nft.category === "Podcast") {
         setPodcastNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "articles") {
+      if (nft.category === "Articles") {
         setArticleNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "films") {
+      if (nft.category === "Films") {
         setFilmsNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "education") {
+      if (nft.category === "Education") {
         setEducationNfts(oldArray => [...oldArray, nft]);
       }
     })
@@ -186,8 +196,8 @@ function All() {
                 />
               </div>
                 {/* {console.log(nfts[0])} */}
-              {/* <button onClick={getNftData}>getNftData</button> */}
-              {/* <butto onClick={filterNFts}>filterNFts</butto>/ */}
+              <button onClick={getNftData}>getNftData</button>
+              {/* <button onClick={filterNFts}>filterNFts</button>/ */}
             </Element>
             <Element name="animation" className="animation-section">
               <div className="insideContainer">
