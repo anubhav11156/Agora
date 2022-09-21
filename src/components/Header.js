@@ -120,11 +120,17 @@ function Header() {
       position: toast.POSITION.TOP_CENTER
     });
   }
+
+  const agoraClickHandle = () => {
+    navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
     return (
         <Container>
           <div className="left">
             <div className="logo-div">
-              <p>agora</p>
+              <p onClick={agoraClickHandle}>agora</p>
             </div>
           </div>
           <Menu>
@@ -137,7 +143,7 @@ function Header() {
               </div>
               <div className="dashboard-div">
 
-                { isAuthenticated ? <Link to="/dashboard" state={stateToPass}>
+                { isAuthenticated ? <Link to="/dashboard" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' }) }state={stateToPass}>
                   <p>
                     Dashboard
                     <div className="bar"></div>
