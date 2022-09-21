@@ -92,11 +92,7 @@ function All() {
           return nft;
       })
       );
-
       console.log('nft array is : ', nftsArr);
-      setNfts(nftsArr);
-      filterNFts();
-      console.log(nfts);
   }
 
   function filterNFts() {
@@ -128,6 +124,7 @@ function All() {
     })
   }
 
+  // getNftData();
   // --------------------
 
 
