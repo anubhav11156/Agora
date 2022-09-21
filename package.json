@@ -20,6 +20,7 @@
     "chai": "^4.3.6",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.7.1",
+    "file-saver": "^2.0.5",
     "glamor": "^2.20.40",
     "hardhat": "^2.11.2",
     "moralis-v1": "^1.11.0",

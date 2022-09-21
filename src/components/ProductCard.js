@@ -28,7 +28,7 @@ function ProductCard() {
                 </div>
               </div>
               <div className="type">
-                <p>Education</p>
+                <p>Art</p>
               </div>
             </div>
             <div className="supply-sold">
