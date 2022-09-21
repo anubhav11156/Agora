@@ -58,9 +58,36 @@ function Dashboard() {
               </div>
             </div>
             <div className="options-section">
-              <button className="publish-button" onClick={publishHandle}>Publish</button>
-              <button className="products-button" onClick={productHandle}>Products</button>
-              <button className="inventory-button" onClick={inventoryHandle}>Inventory</button>
+              <div className="publish-button" onClick={publishHandle}
+                style={{
+                  color: isPublishClicked ? 'rgba(255,100,234,255)' : ''
+                }}
+                >
+                <div className="icon-div">
+                  <img src="/images/publish-sidebar.png" />
+                </div>
+                <p>Publish</p>
+              </div>
+              <div className="products-button" onClick={productHandle}
+                style={{
+                  color: isProducClicked ? 'rgba(255,100,234,255)' : ''
+                }}
+              >
+                <div className="icon-div">
+                  <img src="/images/product-sidebar.png" />
+                </div>
+                <p>Products</p>
+              </div>
+              <div className="inventory-button" onClick={inventoryHandle}
+                style={{
+                  color: isInventoryClicked ? 'rgba(255,100,234,255)' : ''
+                }}
+              >
+                <div className="icon-div">
+                  <img src="/images/inventory-sidebar.png" />
+                </div>
+                <p>Inventory</p>
+              </div>
             </div>
           </SideBar>
           <MainSection>
@@ -102,7 +129,7 @@ const SideBar=styled.div`
   border-right: 1px solid black;
 
   .profile-section {
-    flex:1;
+    height: 280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -164,17 +191,46 @@ const SideBar=styled.div`
   }
 
   .options-section {
-    margin-top: 30px;
+    margin-top: 10px;
     flex: 2.2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
+    overflow: hidden;
 
     .publish-button,
     .products-button,
     .inventory-button {
+      display: flex;
+      align-items: center;
+      width: 100%;
       cursor: pointer;
+      color: white;
+      height: 50px;
+      padding-left: 34px;
+      border-bottom: 1px solid grey;
+      transition: color 0.25s;
+
+      &:hover {
+        color:rgba(255,100,234,255);
+      }
+
+      .icon-div {
+        height: 20px;
+        width: 20px;
+        margin-right: 5px;
+        opacity: 0.86;
+        img {
+          width: 100%;
+        }
+      }
+      p {
+        margin: 0;
+        margin-top: 3px;
+        font-family: Mabry-Regular;
+        font-size: 17px;
+      }
     }
   }
 `
