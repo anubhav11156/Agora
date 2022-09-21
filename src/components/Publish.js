@@ -216,8 +216,6 @@ function Publish() {
 
   /*--------Here write the code for minting the NFT--------*/
 
-  const { Moralis } = useMoralis();
-
   const mintToken = async () => {
     // write the mint logic
     const modal = new web3modal({

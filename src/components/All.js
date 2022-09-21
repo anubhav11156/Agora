@@ -25,9 +25,8 @@ import axios from "axios";
 import { ethers } from "ethers";
 import { useEffect } from 'react'
 
+
 function All() {
-
-
 
   // -------------------- Fetching Nfts from Contract
 
@@ -42,10 +41,12 @@ function All() {
   const [ filmsNfts, setFilmsNfts ] = useState([]);
   const [ educationNfts, setEducationNfts ] = useState([]);
 
-  const { Moralis } = useMoralis();
+  const { Moralis, isAuthenticated } = useMoralis();
 
   useEffect(() => {
-    getNftData()
+    if(isAuthenticated){
+      getNftData()
+    }
   }, [])
 
   async function getNftData() {
@@ -66,7 +67,6 @@ function All() {
     }
 
     const data = await Moralis.executeFunction(options);
-    // console.log(data);
     const nftsArr = await Promise.all(
       data.map(async (i) => {
           let options = {
@@ -78,6 +78,7 @@ function All() {
             },
           }
           const tokenUri = await Moralis.executeFunction(options);
+          console.log(tokenUri)
           const meta = await axios.get(tokenUri);
           let price = ethers.utils.formatEther(i.price);
           let nft = {
@@ -86,7 +87,7 @@ function All() {
               name: meta.data.name,
               remaining: i.supplyleft.toNumber(),
               cover: meta.data.cover,
-              category: ''
+              category: i.category
           };
           return nft;
       })
@@ -95,57 +96,33 @@ function All() {
       console.log('nft array is : ', nftsArr);
       setNfts(nftsArr);
       filterNFts();
-      // console.log(nfts);
+      console.log(nfts);
   }
 
   function filterNFts() {
     nfts.map( (nft) => {
-      // if (nft.category === "music") {
-      //   setMusicNfts(oldArray => [...oldArray, nft]);
-      // }
-      // if (nft.category === "animation") {
-      //   setAnimationNfts(oldArray => [...oldArray, nft]);
-      // }
-      // if (nft.category === "ebooks") {
-      //   setEbooksNfts(oldArray => [...oldArray, nft]);
-      // }
-      // if (nft.category === "art") {
-      //   setArtNfts(oldArray => [...oldArray, nft]);
-      // }
-      // if (nft.category === "podcast") {
-      //   setPodcastNfts(oldArray => [...oldArray, nft]);
-      // }
-      // if (nft.category === "articles") {
-      //   setArticleNfts(oldArray => [...oldArray, nft]);
-      // }
-      // if (nft.category === "films") {
-      //   setFilmsNfts(oldArray => [...oldArray, nft]);
-      // }
-      // if (nft.category === "education") {
-      //   setEducationNfts(oldArray => [...oldArray, nft]);
-      // }
-      if (nft.category === "") {
+      if (nft.category === "music") {
         setMusicNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "") {
+      if (nft.category === "animation") {
         setAnimationNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "") {
+      if (nft.category === "ebooks") {
         setEbooksNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "") {
+      if (nft.category === "art") {
         setArtNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "") {
+      if (nft.category === "podcast") {
         setPodcastNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "") {
+      if (nft.category === "articles") {
         setArticleNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "") {
+      if (nft.category === "films") {
         setFilmsNfts(oldArray => [...oldArray, nft]);
       }
-      if (nft.category === "") {
+      if (nft.category === "education") {
         setEducationNfts(oldArray => [...oldArray, nft]);
       }
     })
@@ -209,8 +186,8 @@ function All() {
                 />
               </div>
                 {/* {console.log(nfts[0])} */}
-              <button onClick={getNftData}>getNftData</button>
-              <button onClick={filterNFts}>filterNFts</button>
+              {/* <button onClick={getNftData}>getNftData</button> */}
+              {/* <butto onClick={filterNFts}>filterNFts</butto>/ */}
             </Element>
             <Element name="animation" className="animation-section">
               <div className="insideContainer">
