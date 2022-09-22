@@ -82,6 +82,7 @@ const Container=styled.div`
   border-radius: 6px;
   cursor: pointer;
   display: flex;
+  
   flex-direction: column;
   overflow: hidden;
   position: relative;

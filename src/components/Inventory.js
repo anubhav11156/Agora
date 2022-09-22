@@ -73,10 +73,6 @@ function Inventory() {
         {nfts.map( (token, i) => (
           <InventoryCard tokenId={token.tokenId} cover={token.cover} content ={token.content} name={token.name} price={token.price} category={token.category}/>
         ))}
-          {/* <InventoryCard />
-          <InventoryCard />
-          <InventoryCard />
-          <InventoryCard /> */}
         </InventoryList>
       </Container>
     )

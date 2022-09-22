@@ -72,10 +72,6 @@ function Products() {
           {nfts.map( (token, i) => (
             <ProductCard tokenId={token.tokenId} cover={token.cover} name={token.name} price={token.price} category={token.category}/>
           ))}
-            {/* <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard /> */}
           </ProductList>
         </Container>
     )

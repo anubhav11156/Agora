@@ -63,15 +63,15 @@ function CategorySection(props) {
                 </button>
               </div>
             </div>
-            <div className="slider-div">
+
               <Slider ref={sliderRef}
-                slidesToShow={1}
+                slidesToShow={NFTs.length}
                 slidesToScroll={1}
                 dots={true}
               >
               {NFTs}
               </Slider>
-            </div>
+
           </ProductSection>
         </Container>
     )
