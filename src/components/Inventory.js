@@ -53,7 +53,7 @@ function Inventory() {
       })
       );
 
-      console.log('nft array is : ', nftsArr);
+      // console.log('nft array is : ', nftsArr);
       setNfts(nftsArr);
   }
 

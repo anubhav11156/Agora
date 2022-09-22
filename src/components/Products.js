@@ -7,7 +7,7 @@ import { contractAbi } from "../config";
 import axios from "axios";
 
 function Products() {
-  
+
   const [nfts, setNfts] = useState([])
 
   const { Moralis } = useMoralis();
@@ -26,7 +26,7 @@ function Products() {
       params: {},
     }
 
-    const data = await Moralis.executeFunction(options);
+    const data = await Moralis.executeFunction(options)
     const nftsArr = await Promise.all(
       data.map(async (i) => {
           let options = {
@@ -51,12 +51,12 @@ function Products() {
           };
           return nft;
       })
-      );
+    )
 
-      console.log('nft array is : ', nftsArr);
+      // console.log('nft array is : ', nftsArr);
       setNfts(nftsArr);
   }
-  
+
     return (
         <Container>
           <div className="heading">
