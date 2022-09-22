@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Web3Storage, File } from 'web3.storage/dist/bundle.esm.min.js';
 import { ToastContainer, toast } from 'react-toastify';
 import BarLoader from "react-spinners/BarLoader";
+import PropagateLoader from "react-spinners/PropagateLoader";
 import { useMoralis } from 'react-moralis';
 // import { contractAddress, contractAbi } from '../config'
 import { contractAddress } from "../address.js";
@@ -23,6 +24,7 @@ function Publish() {
 
   const [isLoadingBarOfCoverActive, setIsLoadingBarOfCoverActive] = useState(false);
   const [isLoadingBarOfContentActive, setIsLoadingBarOfContentActive] = useState(false);
+  const [isMinting, setIsMinting] = useState(false);
 
   const [formInput, setFormInput] = useState({
     name:"",
@@ -35,8 +37,6 @@ function Publish() {
 
   async function upload() {
   }
-
-  console.log(formInput);
 
   const [isAnimationActive, setIsAnimationActive] = useState(false);
   const [isMusicActive, setIsMusicActive] = useState(false);
@@ -178,11 +178,13 @@ function Publish() {
     return new Web3Storage({ token: getAccessToken() })
   }
 
+  /* using two flags below, 0 for coverHandle and 1 for contentHandle--- why? so that toast get fired only
+  when we upload cover image an content*/
   const coverHandle = async () => {
     const fileInput = document.getElementById('cover');
     const filePath = fileInput.files[0].name;
     setIsLoadingBarOfCoverActive(true);
-    const coverCID = await uploadToIPFS(fileInput.files);
+    const coverCID = await uploadToIPFS(fileInput.files,0);
 
     setFormInput({
       ...formInput,
@@ -194,7 +196,7 @@ function Publish() {
     const fileInput = document.getElementById('content');
     const filePath = fileInput.files[0].name;
     setIsLoadingBarOfContentActive(true);
-    const contentCID = await uploadToIPFS(fileInput.files);
+    const contentCID = await uploadToIPFS(fileInput.files,1);
 
     setFormInput({
       ...formInput,
@@ -202,78 +204,39 @@ function Publish() {
     })
   }
 
-  const uploadToIPFS = async (files) => {
+  const uploadToIPFS = async (files, flag) => {
     const client = makeStorageClient()
     const cid = await client.put(files)
     setIsLoadingBarOfCoverActive(false);
     setIsLoadingBarOfContentActive(false);
-    toast.success("Uploaded to IPFS", {
-      position: toast.POSITION.TOP_CENTER
-    });
+
+    // fire toast only for cover image and content.
+    if(flag==0 || flag==1){
+      toast.success("Uploaded to IPFS", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
+
     return cid
   }
 
   const metadata = async () => {
-    console.log("testing");
     const {name, price, coverImageURI, contentURI} = formInput;
     if (!name || !price || !coverImageURI || !contentURI) return;
-    // console.log('testing afre json');
     const data = JSON.stringify({ name, coverImageURI, contentURI });
-    // console.log("stringify data",data)
-
-    // const buffer = Buffer.from(JSON.stringify(data))
-    // console.log("buffer is", buffer);
     const files = [
-      // new File(['contents-of-file-1'], 'plain-utf8.txt'),
       new File([data], 'data.json')
     ]
     const metaCID = await uploadToIPFS(files);
-    console.log('meta', `https://ipfs.io/ipfs/${metaCID}/data.json`)
     return `https://ipfs.io/ipfs/${metaCID}/data.json`
   }
 
-  // metadata();
-  /* ---------------------------------------------------- */
-
-      // ------- infura ipfs
-
-    //   const projectId = `2F5SZBsOjULuF87T9JOznLFNUD5`
-    //   const projectSecret = `16a6ff76691974f268dc48ceef175436`
-    //   const ipfsGateway = "https://agora.infura-ipfs.io/ipfs/"
-
-    //   const auth =
-    //       "Basic " +
-    //       Buffer.from(projectId + ":" + projectSecret).toString("base64");
-
-    //   const client = ipfsClient.create({
-    //       host: "ipfs.infura.io",
-    //       port: 5001,
-    //       protocol: "https",
-    //       headers: {
-    //           authorization: auth,
-    //       },
-    //   });
-
-    //   async function metadata() {
-    //     const {name, price, coverImageURI, contentURI} = formInput;
-    //     if (!name || !price || !coverImageURI || !coverImageURI) return;
-    //     const data = JSON.stringify({ name, coverImageURI, contentURI });
-    //     try {
-    //         const added = await client.add(data);
-    //         const metaUrl = `${ipfsGateway}${added.path}`;
-    //         return metaUrl;
-    //     } catch (error) {
-    //         console.log("Error uploading:", error);
-    //     }
-    // }
-
-      // -------
-
-
-  /*--------Here write the code for minting the NFT--------*/
+  /*----------------Code for minting the NFT------------------*/
 
   const mintToken = async () => {
-    // write the mint logic
+
+    setIsMinting(true);
+
     const uri = await metadata();
     const modal = new web3modal({
       network: "mumbai",
@@ -290,11 +253,23 @@ function Publish() {
   const price = ethers.utils.parseEther(formInput.price);
   const publish = await contract.createToken(uri, formInput.supply, price, formInput.category, {
       gasLimit: 1000000,
-  });
-  await publish.wait();
+  })
+  await publish.wait()
+    .then( () => {
+      toast.success("Token Minted Successfully.", {
+      position: toast.POSITION.TOP_CENTER
+      });
+      setIsMinting(false);
+    }).catch( () => {
+      toast.error("Failed to mint token.", {
+        position: toast.POSITION.TOP_CENTER
+      });
+       setIsMinting(false);
+    })
   }
 
   /*------------------------------------------------------*/
+
     return (
         <Container>
           <div className="heading">
@@ -498,7 +473,12 @@ function Publish() {
               </div>
             </Upload>
             <MintButton onClick={mintToken}>
-              Mint Token
+              {
+                isMinting ? <PropagateLoader
+                 color="#ffffff"
+                 size={13}
+               /> : <p>Mint Token</p>
+              }
             </MintButton>
           </PublishForm>
         </Container>
@@ -800,16 +780,22 @@ const MintButton=styled.button`
   margin-top: 5px;
   margin-right: 30px;
   margin-left: 30px;
+  padding-top: 17px;
   height:  50px;
   cursor: pointer;
   border: 1px solid black;
   border-radius: 5px;
-  font-family: Mabry-Regular;
-  color: white;
   background-color: black;
-  font-size: 18px;
   transition: all 0.15s;
+  display: flex;
+  justify-content: center;
 
+  p {
+    margin-top: -1px;
+    font-family: Mabry-Regular;
+    font-size: 18px;
+    color: white;
+  }
   &:hover {
     background-color:rgba(35, 160, 148, 1);
     color: black;
