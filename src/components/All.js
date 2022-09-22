@@ -22,7 +22,6 @@ import { useState } from 'react'
 import { contractAddress } from "../address.js";
 import { contractAbi } from "../config";
 import axios from "axios";
-import { ethers } from "ethers";
 import { useEffect } from 'react'
 
 
@@ -43,11 +42,11 @@ function All() {
 
   const { Moralis, isAuthenticated } = useMoralis();
 
-  useEffect(() => {
-    // if(isAuthenticated){
-      getNftData()
-    // }
-  }, [])
+  // useEffect(() => {
+  //   // if(isAuthenticated){
+  //     setAuthenticate
+  //   // }
+  // }, [])
 
   async function getNftData() {
     // await Moralis.enableWeb3({
@@ -78,15 +77,14 @@ function All() {
           }
           const tokenUri = await Moralis.executeFunction(options);
           const meta = await axios.get(tokenUri);
-          console.log(meta.data.contentURI)
-          let price = ethers.utils.formatEther(i.price);
+          // console.log(meta.data.contentURI)
+          let price = Moralis.Units.FromWei(i.price);
           let nft = {
               price,
               tokenId: i.tokenId.toNumber(),
               name: meta.data.name,
               remaining: i.supplyleft.toNumber(),
-              cover: meta.data.contentURI,
-              // cover: meta.data.coverImageURI,
+              cover: meta.data.coverImageURI,
               category: i.category
           };
           return nft;

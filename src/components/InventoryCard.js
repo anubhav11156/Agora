@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { saveAs } from "file-saver";
 
-function InventoryCard() {
+function InventoryCard(prop) {
 
   const downloadHandle = () => {
     // const name = fileName;
@@ -13,21 +13,21 @@ function InventoryCard() {
     return (
         <Container>
           <div className="imageContainer">
-            <img className="coverImg" src="/images/profile-1.jpg" />
+            <img className="coverImg" src={prop.cover} />
           </div>
           <div className="tokenDetail">
             <div className="name">
-              <p>Battery Park </p>
+              <p>{prop.name}</p>
             </div>
             <div className="price-category-tokenType">
               <div className="price">
                 <div className="icon-div">
                   <img src="/images/polygon-black.png"/>
                 </div>
-                <p>70</p>
+                <p>{prop.price}</p>
               </div>
               <div className="category">
-                <p>Education</p>
+                <p>{prop.category}</p>
               </div>
               <div className="tokenType">
                 <p>Non-Fungible</p>
@@ -38,7 +38,7 @@ function InventoryCard() {
             </div>
           </div>
           <div className="tokneID">
-            <p># 1</p>
+            <p># {prop.tokenId}</p>
           </div>
         </Container>
     )

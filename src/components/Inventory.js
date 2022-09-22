@@ -1,8 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import InventoryCard from './InventoryCard'
+import { useMoralis } from 'react-moralis'
+import { contractAddress } from "../address.js";
+import { contractAbi } from "../config";
+import axios from "axios";
 
 function Inventory() {
+
+  const [nfts, setNfts] = useState([])
+
+  const { Moralis } = useMoralis()
+
+  useEffect(() => {
+    getNftData()
+  }, [])
+
+  async function getNftData() {
+    await Moralis.enableWeb3();
+    let options = {
+      contractAddress: contractAddress,
+      functionName: 'fetchInventory',
+      abi: contractAbi.abi,
+      params: {},
+    }
+
+    const data = await Moralis.executeFunction(options);
+    const nftsArr = await Promise.all(
+      data.map(async (i) => {
+          let options = {
+            contractAddress: contractAddress,
+            functionName: 'uri',
+            abi: contractAbi.abi,
+            params: {
+              tokenId: i.tokenId.toString()
+            },
+          }
+          const tokenUri = await Moralis.executeFunction(options);
+          // console.log(tokenUri)
+          const meta = await axios.get(tokenUri);
+          let price = Moralis.Units.FromWei(i.price);
+          let nft = {
+              price,
+              tokenId: i.tokenId.toNumber(),
+              name: meta.data.name,
+              remaining: i.supplyleft.toNumber(),
+              cover: meta.data.coverImageURI,
+              category: i.category
+          };
+          return nft;
+      })
+      );
+
+      console.log('nft array is : ', nftsArr);
+      setNfts(nftsArr);
+  }
+
+
     return (
       <Container>
         <div className="heading">
@@ -15,10 +69,13 @@ function Inventory() {
           </div>
         </div>
         <InventoryList>
+        {nfts.map( (token, i) => (
+          <InventoryCard tokenId={token.tokenId} cover={token.cover} name={token.name} price={token.price} category={token.category}/>
+        ))}
+          {/* <InventoryCard />
           <InventoryCard />
           <InventoryCard />
-          <InventoryCard />
-          <InventoryCard />
+          <InventoryCard /> */}
         </InventoryList>
       </Container>
     )

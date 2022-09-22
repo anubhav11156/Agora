@@ -5,7 +5,6 @@ import { useMoralis } from 'react-moralis'
 import { contractAddress } from "../address.js";
 import { contractAbi } from "../config";
 import axios from "axios";
-import { ethers } from "ethers";
 
 function Products() {
   
@@ -17,11 +16,12 @@ function Products() {
     getNftData()
   }, [])
 
+
   async function getNftData() {
     await Moralis.enableWeb3();
     let options = {
       contractAddress: contractAddress,
-      functionName: 'fetchStore',
+      functionName: 'fetchMyListings',
       abi: contractAbi.abi,
       params: {},
     }
@@ -40,7 +40,7 @@ function Products() {
           const tokenUri = await Moralis.executeFunction(options);
           // console.log(tokenUri)
           const meta = await axios.get(tokenUri);
-          let price = ethers.utils.formatEther(i.price);
+          let price = Moralis.Units.FromWei(i.price);
           let nft = {
               price,
               tokenId: i.tokenId.toNumber(),
@@ -70,8 +70,8 @@ function Products() {
           </div>
           <ProductList>
           {nfts.map( (token, i) => (
-                <ProductCard tokenId={token.tokenId} cover={token.cover} name={token.name} price={token.price} category={token.category}/>
-              ))}
+            <ProductCard tokenId={token.tokenId} cover={token.cover} name={token.name} price={token.price} category={token.category}/>
+          ))}
             {/* <ProductCard />
             <ProductCard />
             <ProductCard />
