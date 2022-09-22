@@ -11,7 +11,7 @@ import { ethers } from "ethers";
 
 function SectionCard(prop) {
 
-  // if user is authenticated then execute by option else say to connect wallet 
+  // if user is authenticated then execute by option else say to connect wallet
   async function buy() {
       const modal = new web3modal({
           network: "mumbai",
@@ -64,6 +64,9 @@ function SectionCard(prop) {
             </div>
             <BuyButton onClick={buy}>Buy Now</BuyButton>
           </Detail>
+          <div className="tokenId-div">
+            <p># {prop.tokenId}</p>
+          </div>
         </Container>
     )
 }
@@ -81,6 +84,7 @@ const Container=styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 
   &:hover {
     box-shadow: 4px 4px 0px black;
@@ -88,6 +92,26 @@ const Container=styled.div`
 
   &:hover .coverImg {
     transform: scale(1.08);
+  }
+
+  .tokenId-div {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 25px;
+    min-width: 63px;
+    border-radius: 4px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      margin: 0;
+      font-family: Mabry-medium;
+      font-size: 16px;
+      color: white;
+    }
   }
 `
 
@@ -198,7 +222,7 @@ const Detail=styled.div`
         font-family: Arial;
         font-weight: bold;
         font-size: 18px;
-        color: rgba(62, 66, 63, 0.5);
+        color: black;
       }
 
     }
@@ -212,13 +236,15 @@ const BuyButton=styled.button`
   cursor: pointer;
   border: 1px solid black;
   border-radius: 5px;
-  color: black;
+  color: white;
+  background-color: black;
   font-size: 18px;
   box-shadow: 0px 0px 0px black;
   transition: background-color 0.15s, opacity 0.15s;
 
   &:hover {
     background-color: rgba(255,100,234,255);
+    color: black;
   }
 
   &:active {

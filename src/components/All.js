@@ -91,7 +91,7 @@ function All() {
       setNfts(nftsArr);
       filterNFts();
     }
-    
+
   function filterNFts() {
     nfts.map( (nft) => {
       if (nft.category === "Music") {
@@ -336,7 +336,7 @@ const Description=styled.div`
 const Content=styled.div`
   height: 7700px;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 955px 955px 955px 955px 955px 955px 955px 955px;
 
   .music-section,
   .animation-section,

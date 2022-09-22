@@ -10,22 +10,33 @@ function CategorySection(props) {
 
   const data = props.data;
   const nft = props.items;
+  const NFTs = nft.map( (token, i) => {
+    return (
+      <SectionCard
+        tokenId={token.tokenId}
+        cover={token.cover}
+        name={token.name}
+        price={token.price}
+        remaining={token.remaining}
+      />
+    )
+  })
 
   const sliderRef = useRef(null);
-  // console.log(sliderRef);
+  console.log(sliderRef);
   const next = () => sliderRef.current.slickNext();
   const prev = () => sliderRef.current.slickPrev();
 
-  let SliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 850,
-    arrows: false,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    autoplay: false,
-    autoplaySpeed: 4000
-  }
+  // let SliderSettings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 850,
+  //   arrows: false,
+  //   slidesToShow: 3,
+  //   slidesToScroll: 3,
+  //   autoplay: false,
+  //   autoplaySpeed: 4000
+  // }
 
   if (!nft) return null
     return (
@@ -52,17 +63,14 @@ function CategorySection(props) {
                 </button>
               </div>
             </div>
-            <div className="product-container">
-              <Carousel ref={sliderRef} {...SliderSettings}>
-              {nft.map( (token, i) => (
-                <SectionCard tokenId={token.tokenId} cover={token.cover} name={token.name} price={token.price} remaining={token.remaining}/>
-              ))}
-                {/* <SectionCard />
-                <SectionCard />
-                <SectionCard />
-                <SectionCard />
-                <SectionCard /> */}
-              </Carousel>
+            <div className="slider-div">
+              <Slider ref={sliderRef}
+                slidesToShow={1}
+                slidesToScroll={1}
+                dots={true}
+              >
+              {NFTs}
+              </Slider>
             </div>
           </ProductSection>
         </Container>
@@ -202,51 +210,7 @@ const ProductSection=styled.div`
 
   }
 
-  .product-container {
-    flex:1;
-    display:flex;
-    flex-direction: column;
-  }
-`
-
-const Carousel=styled(Slider)`
-
-  .slick-dots {
-    opacity: 0.8;
-    display: flex;
-    justify-content: center;
-    margin: 0;
-
-    list-style-type: none;
-
-      li {
-        margin: 0 2px;
-      }
-
-      button {
-        display: block;
-        width: 8px;
-        height: 8px;
-        padding: 0;
-        margin-top: 5px;
-
-        border: 1px solid black;
-        border-radius: 100%;
-
-        text-indent: -9999px;
-      }
-
-      li.slick-active button {
-        transform: scale(1.2);
-        background-color: black;
-      }
-
-  }
-
-  .slick-list {
-    margin: 0 -13px;
-  }
-  .slick-slide>div {
-    padding: 0 13px;
+  .slider-div {
+    
   }
 `
