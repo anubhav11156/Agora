@@ -41,20 +41,17 @@ function All() {
   const [ educationNfts, setEducationNfts ] = useState([]);
 
   const { Moralis, isAuthenticated } = useMoralis();
+  const [loaded, setLoaded] = useState(false);
 
-  // useEffect(() => {
-  //   // if(isAuthenticated){
-  //     setAuthenticate
-  //   // }
-  // }, [])
+  useEffect(() => {
+    getNftData()
+  }, [])
+
+  useEffect(() => {
+    getNftData()
+  }, [loaded])
 
   async function getNftData() {
-    // await Moralis.enableWeb3({
-    //   provider: "web3Auth",
-    //   clientId: "BEKdZ7Wk_JPGM_MbJcYrFk0HMqOzQ0W_-40hzCXJv3H2KINDeMfpW--J-BOTYSBEbQcVr_oaqpY-yNlk-9On88c",
-    //   chainId: "0x13881",
-    //   signingMessage:"agora authentication"
-    // });
     await Moralis.enableWeb3();
     // this is for fetching the nft data form the smart contract as an array
     let options = {
@@ -93,8 +90,8 @@ function All() {
       console.log('nft array is : ', nftsArr);
       setNfts(nftsArr);
       filterNFts();
-  }
-
+    }
+    
   function filterNFts() {
     nfts.map( (nft) => {
       if (nft.category === "Music") {
@@ -122,6 +119,7 @@ function All() {
         setEducationNfts(oldArray => [...oldArray, nft]);
       }
     })
+    setLoaded(true);
   }
 
   // getNftData();
@@ -138,7 +136,7 @@ function All() {
     autoplaySpeed: 4000
   }
 
-
+  // if (loaded == true && !nfts.length)
     return (
       <Container>
         <Banner>
@@ -183,7 +181,7 @@ function All() {
                 />
               </div>
                 {/* {console.log(nfts[0])} */}
-              <button onClick={getNftData}>getNftData</button>
+              {/* <button onClick={getNftData}>getNftData</button> */}
               {/* <button onClick={filterNFts}>filterNFts</button>/ */}
             </Element>
             <Element name="animation" className="animation-section">
