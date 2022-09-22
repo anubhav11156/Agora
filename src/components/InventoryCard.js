@@ -30,7 +30,7 @@ function InventoryCard(prop) {
                 <p>{prop.category}</p>
               </div>
               <div className="tokenType">
-                <p>Non-Fungible</p>
+                <p>ERC-1155</p>
               </div>
             </div>
             <div className="download" onClick={() => downloadHandle(prop.name, prop.content)}>
@@ -160,7 +160,7 @@ const Container=styled.div`
 
         p {
           font-family: Mabry-Regular;
-          font-size: 14px;
+          font-size: 15px;
         }
       }
     }
