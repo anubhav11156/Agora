@@ -85,7 +85,7 @@ function All() {
               tokenId: i.tokenId.toNumber(),
               name: meta.data.name,
               remaining: i.supplyleft.toNumber(),
-              cover: meta.data.contentURI,
+              cover: meta.data.coverImageURI,
               // cover: meta.data.coverImageURI,
               category: i.category
           };
