@@ -27,7 +27,7 @@ This is a decentralized version of the [Gumroad.com](https://gumroad.com/). A pl
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/anshss/PolygonBUIDLIT.git
+   git clone https://github.com/anubhav11156/agora
    
    ```
 2. Install NPM packages
@@ -44,7 +44,7 @@ This is a decentralized version of the [Gumroad.com](https://gumroad.com/). A pl
 
 [Video explanation]()
 <br/>
-[Polygonscan contract link]()
+[Polygonscan contract link](https://mumbai.polygonscan.com/address/0xa1d67796F0aa857b58F0f81C318c58db10B55f6d)
 
 <br/>
 <br/>
