@@ -1,13 +1,51 @@
-# Sample Hardhat Project
+# Agora
+This is a decentralized version of the [Gumroad.com](https://gumroad.com/). A place for digital creators to mint and sell their content. These files are then available for purchase by other users. Users can login using their web2 socials like google, facebook etc. They can mint any file as ERC1155 token and set its attributes like supply, price, cover image.
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+<br/>
 
-Try running some of the following tasks:
+### About Project
+- Users can login with their web2 socials like google, facebook.
+- They can browse Nfts on the homepage.
+- A user can buy any Nft, and download its content from inventory page.
+- Digital content creator can mint thier content and can specify the number of copies of their content.
+- Multiple copies of a token is facilitated by using ERC1155 standard.
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+
+<br/>
+
+### Built with
+- CSS
+- React.js
+- Solidity
+- Moralis
+- Ether.js
+- IPFS
+
+<br/>
+
+### Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/anshss/PolygonBUIDLIT.git
+   
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+   
+3. Start project
+   ```sh
+   npm start
+   ```
+
+<br/>
+
+[Video explanation]()
+<br/>
+[Polygonscan contract link]()
+
+<br/>
+<br/>
+
