@@ -46,6 +46,7 @@ function Inventory() {
               name: meta.data.name,
               remaining: i.supplyleft.toNumber(),
               cover: meta.data.coverImageURI,
+              content: meta.data.contentURI,
               category: i.category
           };
           return nft;
@@ -70,7 +71,7 @@ function Inventory() {
         </div>
         <InventoryList>
         {nfts.map( (token, i) => (
-          <InventoryCard tokenId={token.tokenId} cover={token.cover} name={token.name} price={token.price} category={token.category}/>
+          <InventoryCard tokenId={token.tokenId} cover={token.cover} content ={token.content} name={token.name} price={token.price} category={token.category}/>
         ))}
           {/* <InventoryCard />
           <InventoryCard />

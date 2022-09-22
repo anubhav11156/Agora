@@ -4,10 +4,10 @@ import { saveAs } from "file-saver";
 
 function InventoryCard(prop) {
 
-  const downloadHandle = () => {
-    // const name = fileName;
-    // const URL = fileURL;
-    // saveAs(URL, name);
+  const downloadHandle = (_fileName, _fileURL) => {
+    const name = _fileName;
+    const URL = _fileURL;
+    saveAs(URL, name);
   }
 
     return (
@@ -33,7 +33,7 @@ function InventoryCard(prop) {
                 <p>Non-Fungible</p>
               </div>
             </div>
-            <div className="download" onClick={downloadHandle}>
+            <div className="download" onClick={() => downloadHandle(prop.name, prop.content)}>
               <p>Download</p>
             </div>
           </div>

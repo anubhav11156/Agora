@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable no-unused-vars */
 import React, { useState, CSSProperties } from 'react'
 import styled from 'styled-components'
@@ -6,13 +7,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import BarLoader from "react-spinners/BarLoader";
 import PropagateLoader from "react-spinners/PropagateLoader";
 import { useMoralis } from 'react-moralis';
-// import { contractAddress, contractAbi } from '../config'
 import { contractAddress } from "../address.js";
 import { contractAbi } from "../config";
 import web3modal from "web3modal";
 import { ethers } from "ethers";
-// const ipfsClient = require("ipfs-http-client");
-// import ipfsClient from 'ipfs-http-client';
 
 function Publish() {
 
