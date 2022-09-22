@@ -13,7 +13,6 @@ function Dashboard() {
   // use useLocation and extract state from the parms which was passed from the homepage
   const {state} = useLocation();
   const accountAddress = state.accountAddress;
-  console.log(accountAddress);
 
   const avatar = createAvatar( style, {
     dataUri: true,
