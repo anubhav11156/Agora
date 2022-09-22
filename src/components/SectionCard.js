@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React from 'react'
+import React, { useState }from 'react'
 import styled from 'styled-components'
 // import { contractAddress, contractAbi } from '../config'
 import { contractAddress } from "../address.js";
@@ -7,12 +7,18 @@ import { contractAbi } from "../config";
 import { useMoralis } from 'react-moralis'
 import web3modal from "web3modal";
 import { ethers } from "ethers";
+import { ToastContainer, toast } from 'react-toastify';
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 
 function SectionCard(prop) {
 
+  const [isBuyClicked, setIsBuyClicked ] = useState(false);
   // if user is authenticated then execute by option else say to connect wallet
   async function buy() {
+
+    setIsBuyClicked(true);
+
       const modal = new web3modal({
           network: "mumbai",
           cacheProvider: true,
@@ -30,7 +36,18 @@ function SectionCard(prop) {
           value: price,
           gasLimit: 1000000,
       });
-      await transaction.wait();
+      await transaction.wait()
+      .then( () => {
+        toast.success("Transaction successful.", {
+        position: toast.POSITION.TOP_CENTER
+        });
+        setIsBuyClicked(false);
+      }).catch( () => {
+        toast.error("Transaction failed.", {
+          position: toast.POSITION.TOP_CENTER
+        });
+         setIsBuyClicked(false);
+      })
   }
 
     return (
@@ -62,7 +79,14 @@ function SectionCard(prop) {
                 </div>
               </div>
             </div>
-            <BuyButton onClick={buy}>Buy Now</BuyButton>
+            <BuyButton onClick={buy}>
+              {
+                isBuyClicked ? <PropagateLoader
+                 color="#ffffff"
+                 size={10}
+               /> : <p>Buy Now</p>
+              }
+            </BuyButton>
           </Detail>
           <div className="tokenId-div">
             <p># {prop.tokenId}</p>
@@ -241,7 +265,7 @@ const BuyButton=styled.button`
   font-size: 18px;
   box-shadow: 0px 0px 0px black;
   transition: background-color 0.15s, opacity 0.15s;
-
+  padding-bottom: 7px;
   &:hover {
     background-color: rgba(255,100,234,255);
     color: black;
@@ -249,5 +273,9 @@ const BuyButton=styled.button`
 
   &:active {
     opacity: 0.8;
+  }
+
+  p {
+    margin-top: 9px;
   }
 `

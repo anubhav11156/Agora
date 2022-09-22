@@ -10,7 +10,7 @@ import { useMoralis } from 'react-moralis';
 import { contractAddress } from "../address.js";
 import { contractAbi } from "../config";
 import web3modal from "web3modal";
-import { ethers } from "ethers";
+import { ethers } from "ethers"; 
 
 function Publish() {
 
