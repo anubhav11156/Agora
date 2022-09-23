@@ -42,7 +42,7 @@ This is a decentralized version of the [Gumroad.com](https://gumroad.com/). A pl
 
 <br/>
 
-[Video explanation]()
+[Video explanation](https://drive.google.com/file/d/19N9FmZw2CnRPgUzPXfTyJhbvrBCNeiI1/view?usp=sharing)
 <br/>
 [Polygonscan contract link](https://mumbai.polygonscan.com/address/0xa1d67796F0aa857b58F0f81C318c58db10B55f6d)
 
